@@ -1,0 +1,14 @@
+name = "parity39"
+version = "0.1.0"
+defaultTargets = ["parity39"]
+
+[[lean_lib]]
+name = "Parity39"
+
+[[lean_exe]]
+name = "parity39"
+root = "Main"
+
+[[lean_exe]]
+name = "tests"
+root = "Tests"
