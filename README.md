@@ -75,8 +75,11 @@ and the cards are also decoded jointly, column by column.
     lake exe parity39 split   -k 4 -t 2 -n 3 <24 seed words>
     lake exe parity39 combine -k 4 -t 2 <card> / 3: <card> / …
 
-- A card's number and the threshold are carried by an unprinted symbol covered
-  by the parity words, so a card identifies itself at no cost in length.
+- Nothing but the words needs to be stored. A card's number and the threshold
+  are mixed into its parity words when they are computed, so the 30 written
+  words alone determine which card it is. Writing the number next to the card
+  ("3:") is optional: it is redundant information that lets the card tolerate
+  one more wrong word.
 - Two digest words (a hash of the seed, shared like the rest) check any
   reconstruction; a linear code alone cannot tell a wrong-but-valid set of
   cards from the right one.
