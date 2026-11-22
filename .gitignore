@@ -1,1 +1,15 @@
 .lake/
+**/*.vision/pages/
+**/*.vision/slides/
+.DS_Store
+# LaTeX build products (the compiled main.pdf of each paper version is kept)
+papers/**/*.aux
+papers/**/*.log
+papers/**/*.bbl
+papers/**/*.blg
+papers/**/*.out
+papers/**/*.fls
+papers/**/*.fdb_latexmk
+papers/**/*.synctex.gz
+# Text of a third-party paper used for local citation auditing; not redistributed
+papers/parity39/refs/ambati2026-soups-extract.txt

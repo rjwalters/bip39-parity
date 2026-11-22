@@ -5,3 +5,4 @@ import Parity39.Sha256
 import Parity39.Wordlist
 import Parity39.Bip39
 import Parity39.Repair
+import Parity39.Grid

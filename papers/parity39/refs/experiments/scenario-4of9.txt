@@ -1,0 +1,15 @@
+# lake exe gridtests custom 250 4 4 9 4 5
+4-of-9, 30-word cards (k = 4), 250 trials; % correct / % wrong (rest refused)
+                                      checksum only |  card parity  | parity+digest | grid, no dig. | grid + digest
+  4 cards, 1% word errors               29.2 /   0.0 |   98.4 /   0.0 |   98.4 /   0.0 |   98.4 /   0.0 |   98.4 /   0.0
+  4 cards, 3% word errors                2.8 /   0.0 |   73.6 /   0.0 |   73.6 /   0.0 |   73.6 /   0.0 |   73.6 /   0.0
+  4 cards, 5% word errors                0.0 /   0.0 |   40.0 /   0.0 |   40.0 /   0.0 |   40.0 /   0.0 |   40.0 /   0.0
+  4 cards, one is garbage, 1%            0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0
+  4 cards, one from another set          0.0 / 100.0 |    0.0 / 100.0 |    0.0 /   0.0 |    0.0 / 100.0 |    0.0 /   0.0
+  4 cards, 5 burnt words on each         0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0
+  5 cards, 1% word errors               62.8 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  5 cards, 3% word errors                8.8 /   0.0 |   97.2 /   0.0 |   97.2 /   0.0 |   99.2 /   0.0 |   99.2 /   0.0
+  5 cards, 5% word errors                0.8 /   0.0 |   78.8 /   0.0 |   78.8 /   0.0 |   87.6 /   0.0 |   87.6 /   0.0
+  5 cards, one is garbage, 1%           26.4 /   0.0 |   96.8 /   0.0 |   96.8 /   0.0 |   96.8 /   0.0 |   96.8 /   0.0
+  5 cards, one from another set         16.8 /  83.2 |   16.8 /  83.2 |  100.0 /   0.0 |    0.0 /   0.0 |  100.0 /   0.0
+  5 cards, 5 burnt words on each         0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   62.8 /   0.0 |   62.8 /   0.0

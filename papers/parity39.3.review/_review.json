@@ -1,0 +1,174 @@
+{
+ "schema_version": "1",
+ "kind": "judgment",
+ "version_dir": "parity39.3",
+ "critic_id": "paper-review",
+ "model": "claude-fable-5-2",
+ "rubric": "anvil-pub-v2",
+ "scores": [
+  {
+   "dimension": "1",
+   "score": 5,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Rigor of method / argument: Proposition 1, the digest rule, the decoder steps and the false-accept bound were re-derived and read against `Grid.lean`, `Repair.lean` and `RS.lean`; all agree, and the two round-two loose ends are closed: the bound now counts the first reconstruction and names its assumption (\"the chance of accepting a wrong secret is at most\" — §4.4, with \"If SHA-256 output is modelled as uniformly random\" in §4.3), and the swap estimate states its premises. One point is withheld. The new wrong-number sentence (\"the number it settles on is the one consistent with the card's words\" — §4.2) is true of the code only while the card has parity to spare (k at least 2, and the header then uses one of the floor(k/2) correctable symbols); beyond that the card is kept as unconfirmed evidence under the number that was entered, which the text does not say (T2). The grid decoder also remains a heuristic with no stated class of patterns it corrects."
+  },
+  {
+   "dimension": "2",
+   "score": 5,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Evidence sufficiency: Every cell of Tables 1-4, every point of Fig. 2 and every percentage in the prose was re-read against the six grid logs and `single-phrase.txt`; all match, 31,600 is exact, and the no-digest ablation is now tabulated and reported in all three regimes. The headline effects are several times the stated confidence half-widths. One point is withheld for scope, which the paper states itself (\"It says nothing about fault patterns we did not inject\" — §5.3): one seed, independent uniform substitutions, and no trial behind the wrong-number behaviour that §4.2 now asserts, nor a foreign card with illegible numbers (T2)."
+  },
+  {
+   "dimension": "3",
+   "score": 5,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Clarity of contribution: The organising idea is the first sentence (\"Shares of a secret can repair themselves and each other, at the level where people make mistakes: whole words\" — §1), the three contributions are itemised with section pointers, inherited ingredients are labelled, and the abstract gives the best cell, the weaker 2-of-3 cell and the exactly-t limit. It matches the brief's strongest claim; no underclaiming or buried lede."
+  },
+  {
+   "dimension": "4",
+   "score": 4,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Related-work positioning: SLIP39, SSKR, codex32, Polyseed and now Shamir39 are described on their actual mechanisms and the increment is stated plainly (\"all of these formats decode each share on its own\" — §2). One point is withheld for a baseline a wallet engineer will raise: repairing a near-miss mnemonic by bounded search against the BIP39 checksum or a known address, which existing recovery tools do and which the cited study itself uses, is not positioned against parity words (T3; reviewer recall, not checked online). No litsearch sibling exists; no deduction is taken for that."
+  },
+  {
+   "dimension": "5",
+   "score": 3,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Reproducibility: Commands, seed, toolchain, verbatim logs and file digests are given, and the digests in `refs/experiments/README.txt` were re-hashed against the working tree this pass and match. The paper says (\"The tree is not yet published at a public address\" — §8), and that is still the position: a reader of the PDF cannot obtain the code, the logs or the README, and the README records a base commit \"plus uncommitted changes\". The text is detailed enough to re-implement the scheme, not to rerun the tables (T1). Unchanged from round two because the gap is unchanged."
+  },
+  {
+   "dimension": "6",
+   "score": 4,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Figure & table quality: The four round-two defects are fixed: Table 1's caption agrees with its footnote, Table 2 carries the fifth strategy with a caption that reads alone (\"All other trials were refused, so 0 with no bracket means every trial was refused\" — Table 2), truncation is stated, and Fig. 1's header labels sit inside their boxes (checked on PDF page 4). What remains is small and listed under T7: Table 1's column heads use the N+k shorthand without a gloss, Fig. 2 plots three of the five methods without saying the other two coincide with them, and the side labels of Fig. 1 touch the dashed boxes."
+  },
+  {
+   "dimension": "7",
+   "score": 3,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Prose & structural quality: The reader-flow cap no longer applies: the three round-two define-before-use defects are fixed (\"joint decoding\" is defined in the abstract and introduction and bound to the Grid methods in §5.1; \"row decoder\" is gone; the illegible-number fault is in the list), and of the lens's eight class-1 findings this pass one is confirmed in the body (T9). Sentence-level prose is clean: no AI-tell adjectives, no overfull boxes, no unresolved references, no audience-fit hits. One point is withheld for naming drift, which the lens found again and the text confirms: one baseline is \"Card parity\", \"per-card repair\", \"repairing cards separately\", \"one at a time\" and (\"per-card methods without a digest return a wrong secret\" — §5.3), \"Checksum only\" names a parity check while \"checksum\" elsewhere is BIP39's, and \"row\" names both the unwritten rows and the cards (T5); Fig. 2 also prints two pages after its discussion (T7)."
+  },
+  {
+   "dimension": "8",
+   "score": 4,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Citation hygiene: All 22 entries are cited and all cited keys resolve; journal and proceedings entries are complete with DOIs; the statistical rule is now explained where it is used (\"if the rate were higher, at least one wrong answer would have been\" — §5.3). One point is withheld: the six specification and repository entries that carry the claims about deployed formats point at moving `master` URLs with no revision or access date, and the SOUPS entry has no page range (T8)."
+  },
+  {
+   "dimension": "9",
+   "score": 3,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Rhetorical economy: The argument is stated early and the prose is spare, but the round-two finding stands almost unchanged: the paper is 13 pages against the brief's 10, the no-wrong-secret result still appears five times (abstract, §5.3, the captions of Tables 3 and 4, and \"returned no wrong secret in 31{,}600 trials\" — §9), the exactly-t caveat seven times and the assumed-error-rate caveat four times (T4)."
+  }
+ ],
+ "findings": [
+  {
+   "severity": "major",
+   "dimension": "5",
+   "evidence_span": "main.tex:L695-L699",
+   "rationale": "T1 (S2 open): the source tree is unpublished; the SHA-256 list in refs/experiments/README.txt matches the working tree but pins a tree no reader can fetch, and the README records uncommitted changes.",
+   "suggested_fix": "Publish the repository and cite URL and commit, or archive sources, wordlist, logs and README with the paper and cite the archive. Needs the author."
+  },
+  {
+   "severity": "major",
+   "dimension": "1",
+   "evidence_span": "main.tex:L293-L296",
+   "rationale": "T2: the wrong-number sentence is accurate only while the card has parity to spare (k >= 2; the header uses one of the floor(k/2) correctable symbols). Beyond that Grid.readCard keeps the card as unconfirmed evidence under the number entered. Read from Repair.lean L104-142 and Grid.lean L158-193.",
+   "suggested_fix": "State the capacity cost and the beyond-capacity behaviour in Section 4.2 and in decoder step 1 (L327-329)."
+  },
+  {
+   "severity": "major",
+   "dimension": "2",
+   "evidence_span": "main.tex:L384-L396",
+   "rationale": "T2: no trial exercises a mislabelled card (GridTests.lean always supplies the right number or none), nor a foreign card with illegible numbers; evidence is one seed with independent uniform substitutions.",
+   "suggested_fix": "Add a mislabelled-card scenario to gridtests and report it as a row of Table 2; keep the other scope points as stated limits."
+  },
+  {
+   "severity": "minor",
+   "dimension": "4",
+   "evidence_span": "main.tex:L54-L63",
+   "rationale": "T3 (related-work lead): repair of a near-miss mnemonic by bounded search against the BIP39 checksum or a known address, as existing recovery tools do and as the cited study does, is not positioned against parity words. Reviewer recall; not checked online.",
+   "suggested_fix": "Add two sentences on what parity words give that search does not; re-run paper-litsearch for this cluster."
+  },
+  {
+   "severity": "minor",
+   "dimension": "9",
+   "evidence_span": "main.tex:L728",
+   "rationale": "T4 (S11 not resolved): 13 pages against the brief's 10; no-wrong-secret result at L35, L556-557, L575, L598, L728; exactly-t caveat seven times; assumed-rate caveat four times.",
+   "suggested_fix": "State each once in full and point to it elsewhere; drop the sentence from the captions of Tables 3 and 4."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L402",
+   "rationale": "T5: naming drift. Per-card repair has six labels (L32, L402, L510, L518, L524/L538, L727); the grid decoder four; 'Checksum only' (L399) collides with the BIP39 checksum; 'row' names both unwritten rows and cards (L325, L336, L566); 'holders' as the unit of m (L259); 'burnt' for a destroyed card (L633).",
+   "suggested_fix": "Choose one name per method and bind table labels to it once; rename 'Checksum only' to 'Detection only'; 'no spare cards' at L566; 'm stripped cards' at L259."
+  },
+  {
+   "severity": "minor",
+   "dimension": "2",
+   "evidence_span": "main.tex:L425-L428",
+   "rationale": "T6 (S4 residue): 'repair' is stated flat where Table 1 has 99.5 in four filtered cells, also at L724-725; 'the same holds from one parity word more' leaves a three-part mapping to the reader.",
+   "suggested_fix": "Write 'in at least 99.5% of trials' and spell out which k goes with which fault without the filter."
+  },
+  {
+   "severity": "minor",
+   "dimension": "6",
+   "evidence_span": "main.tex:L505-L514",
+   "rationale": "T7: Fig. 2 prints on page 9, two pages after its discussion on page 7; Table 1 prints inside Section 5.3; Table 1 column heads (N+k) are not glossed; Fig. 2 shows three of five methods without saying the other two coincide; Fig. 1 side labels touch the header boxes.",
+   "suggested_fix": "Move the Fig. 2 float after the 'Spare cards' paragraph; gloss the column heads in the Table 1 caption; add one clause to the Fig. 2 caption; shift the two side labels in figures/grid.tex."
+  },
+  {
+   "severity": "minor",
+   "dimension": "8",
+   "evidence_span": "refs.bib",
+   "rationale": "T8: bip39, slip39, bip93, polyseed, sskr and shamir39 cite moving master URLs with no revision or access date; ambati2026notall has no page range.",
+   "suggested_fix": "Add an access date or a commit to each web entry and the page range to the SOUPS entry."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L714-L715",
+   "rationale": "T9: confirmed define-before-use (referent): 'The trial total' names no number; the abstract's 'the decoder' (L35) should be the grid decoder with the digest; 'the 41 participants who failed' (L56) has no study size.",
+   "suggested_fix": "Name 31,600 at L714; qualify L35; give N = 92 at L56."
+  },
+  {
+   "severity": "nit",
+   "dimension": "1",
+   "evidence_span": "main.tex:L255-L256",
+   "rationale": "T10: Prop. 1(a) 'same number' should be same number and threshold; S_0 '(and nonzero)' (L194) fails when the two error values are equal; 'repaired to one of them' (L199-201) would be an ambiguous result; rescue agrees with another unconfirmed card (L340); a wallet does not ignore extra words (L163-164); no example for 'a better decoder exists' (L676).",
+   "suggested_fix": "Tighten each sentence as listed in comments.md."
+  }
+ ],
+ "critical_flags": [],
+ "total": 36,
+ "threshold": 35,
+ "verdict": "ADVANCE"
+}

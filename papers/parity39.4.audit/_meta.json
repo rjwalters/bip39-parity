@@ -1,0 +1,10 @@
+{
+  "critic": "audit",
+  "role": "paper-audit.md",
+  "started": "2026-11-22T19:03:50Z",
+  "finished": "2026-11-22T19:07:35Z",
+  "model": "claude-fable-5-2",
+  "schema_version": 1,
+  "scorecard_kind": "human-verdict",
+  "compile_location": "scratch copy outside the checkout (requester instruction: do not write into parity39.4/); main.tex byte-identical to the audited one"
+}

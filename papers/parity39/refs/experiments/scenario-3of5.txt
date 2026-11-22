@@ -1,0 +1,21 @@
+# lake exe gridtests custom 250 4 3 5 3 4 5
+3-of-5, 30-word cards (k = 4), 250 trials; % correct / % wrong (rest refused)
+                                      checksum only |  card parity  | parity+digest | grid, no dig. | grid + digest
+  3 cards, 1% word errors               40.8 /   0.0 |   99.6 /   0.0 |   99.6 /   0.0 |   99.6 /   0.0 |   99.6 /   0.0
+  3 cards, 3% word errors                8.0 /   0.0 |   83.2 /   0.0 |   83.2 /   0.0 |   83.2 /   0.0 |   83.2 /   0.0
+  3 cards, 5% word errors                1.2 /   0.0 |   54.8 /   0.0 |   54.8 /   0.0 |   54.8 /   0.0 |   54.8 /   0.0
+  3 cards, one is garbage, 1%            0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0
+  3 cards, one from another set          0.0 / 100.0 |    0.0 / 100.0 |    0.0 /   0.0 |    0.0 / 100.0 |    0.0 /   0.0
+  3 cards, 5 burnt words on each         0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0
+  4 cards, 1% word errors               71.2 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  4 cards, 3% word errors               17.6 /   0.0 |   96.8 /   0.0 |   96.8 /   0.0 |   98.8 /   0.0 |   98.8 /   0.0
+  4 cards, 5% word errors                2.8 /   0.0 |   79.6 /   0.0 |   79.6 /   0.0 |   89.6 /   0.0 |   89.6 /   0.0
+  4 cards, one is garbage, 1%           41.2 /   0.0 |   99.6 /   0.0 |   99.6 /   0.0 |   99.6 /   0.0 |   99.6 /   0.0
+  4 cards, one from another set         23.2 /  76.8 |   23.2 /  76.8 |  100.0 /   0.0 |    0.0 /   0.0 |  100.0 /   0.0
+  4 cards, 5 burnt words on each         0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   72.0 /   0.0 |   72.0 /   0.0
+  5 cards, 1% word errors               89.2 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  5 cards, 3% word errors               32.0 /   0.0 |   99.2 /   0.0 |   99.2 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  5 cards, 5% word errors                6.8 /   0.0 |   94.0 /   0.0 |   94.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  5 cards, one is garbage, 1%           71.2 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  5 cards, one from another set         39.6 /  60.4 |   39.6 /  60.4 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  5 cards, 5 burnt words on each         0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   98.0 /   0.0 |   98.0 /   0.0

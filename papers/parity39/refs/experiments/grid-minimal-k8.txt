@@ -1,0 +1,17 @@
+# lake exe gridtests 300 'only t cards,' 8
+
+2-of-3, 24 seed + 2 digest + 8 parity words per card, 300 trials per row; % correct / % wrong (rest refused)
+                                      checksum only |  card parity  | parity+digest | grid, no dig. | grid + digest
+  only t cards, 1% word errors          51.3 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  only t cards, 3% word errors          10.6 /   0.0 |   99.0 /   0.0 |   99.0 /   0.0 |   99.0 /   0.0 |   99.0 /   0.0
+  only t cards, 5% word errors           3.3 /   0.0 |   95.6 /   0.0 |   95.6 /   0.0 |   95.6 /   0.0 |   95.6 /   0.0
+  only t cards, one from another set     0.0 / 100.0 |    0.0 / 100.0 |    0.0 /   0.0 |    0.0 / 100.0 |    0.0 /   0.0
+  only t cards, one swap on each         0.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+
+3-of-5, 24 seed + 2 digest + 8 parity words per card, 300 trials per row; % correct / % wrong (rest refused)
+                                      checksum only |  card parity  | parity+digest | grid, no dig. | grid + digest
+  only t cards, 1% word errors          38.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  only t cards, 3% word errors           4.0 /   0.0 |   99.0 /   0.0 |   99.0 /   0.0 |   99.0 /   0.0 |   99.0 /   0.0
+  only t cards, 5% word errors           0.6 /   0.0 |   94.6 /   0.0 |   94.6 /   0.0 |   94.6 /   0.0 |   94.6 /   0.0
+  only t cards, one from another set     0.0 / 100.0 |    0.0 / 100.0 |    0.0 /   0.0 |    0.0 / 100.0 |    0.0 /   0.0
+  only t cards, one swap on each         0.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0

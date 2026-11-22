@@ -1,0 +1,405 @@
+{
+  "schema_version": "1",
+  "kind": "judgment",
+  "version_dir": "parity39.1",
+  "critic_id": "readerflow",
+  "model": "claude-fable-5-2",
+  "rubric": "anvil-pub-v2",
+  "scores": [
+    {
+      "dimension": "1",
+      "score": null,
+      "max": 6,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "2",
+      "score": null,
+      "max": 6,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "3",
+      "score": null,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "4",
+      "score": null,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "5",
+      "score": null,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "6",
+      "score": null,
+      "max": 4,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "7",
+      "score": null,
+      "max": 4,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "8",
+      "score": null,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    },
+    {
+      "dimension": "9",
+      "score": null,
+      "max": 4,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "combined decoder never returned a wrong secret",
+      "rationale": "class 1 (Abstract): \"combined decoder\" appears only in the abstract; the body says grid decoder / full decoder / grid decoder with digest / joint decoding.",
+      "suggested_fix": "Use the body's single name in the abstract."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "per-card repair recovered 36\\% and per-card checksums none",
+      "rationale": "class 1 (Abstract): Baselines for the 99.7% headline are not defined until 5.1, under other labels; cards have no 'checksum'.",
+      "suggested_fix": "Name the baselines by what they do and reuse those names in 5.1."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "any $t$ of $n$ cards recover the secret",
+      "rationale": "class 1 (Abstract): \"card\" is never defined as the written share.",
+      "suggested_fix": "Add 'a card is one written share' at first use."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "Across every grid experiment in this paper (28{,}000 trials)",
+      "rationale": "class 1 (5.3 Grids): The 28,000 total has no breakdown and cannot be summed from the rows printed in Tables 2-4.",
+      "suggested_fix": "State which rows x schemes x trials sum to 28,000."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "the original is the unique valid phrase within reach whenever",
+      "rationale": "class 1 (3.1 The code): \"within reach\" is never defined and recurs in 4.2 as if a term.",
+      "suggested_fix": "Replace with the explicit condition on substitutions and erasures."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "in 97.6\\% of trials during development",
+      "rationale": "class 1 (3.2 Repair beyond substitutions): A percentage with no trial count, harness or table; the 24+2 shorthand is also never introduced.",
+      "suggested_fix": "Define the N+k shorthand and give the setup, or move the number to 5.2 with data."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "so a swap may be combined with",
+      "rationale": "class 1 (3.2 Repair beyond substitutions): Why S_0-invariance plus the number of swaps costs exactly two parity words is not stated.",
+      "suggested_fix": "Add one sentence explaining the two-syndrome reserve."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "seed followed by $d$ digest words (below)",
+      "rationale": "class 1 (4.1 Construction): \"seed\" is undefined and collides with the BIP39 seed (PBKDF2 output); digest words are a forward reference.",
+      "suggested_fix": "Define 'seed words' as the mnemonic words at first use; point to 4.3 by number."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "between two distinct dealings in at least",
+      "rationale": "class 1 (4.1 Construction (Prop. 1d)): \"dealing\" is never defined.",
+      "suggested_fix": "Define a dealing after Eq. (3)."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "For 30-word cards with $k=4$ that",
+      "rationale": "class 1 (4.1 Construction): The 30-word card is used before it is defined in 4.3.",
+      "suggested_fix": "Move the standard-card definition into 4.1."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "$h_i = i + 32t$",
+      "rationale": "class 1 (4.2 The unprinted header): The constant 32 and the bound n <= 31 are never explained; hidden rows' header 0 is only in the figure.",
+      "suggested_fix": "Say the card number occupies the low 5 bits and hidden rows carry header 0."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "With 400 trials a reported percentage has a 95\\% confidence half-width of at most 5 points",
+      "rationale": "class 1 (5.1 Setup): Uncertainty is given only for 400-trial cells; Tables 1, 3, 4 use 200, 300, 250 trials.",
+      "suggested_fix": "Give the half-width for each trial count."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "24+2 leaves 13--15\\% of swaps ambiguous",
+      "rationale": "class 1 (5.2 Single phrases): Unfiltered-run numbers that no table shows.",
+      "suggested_fix": "Add the unfiltered columns to Table 1."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "2 dropped words & 1 & 99.5 & 100 & 30 & 100 & 100",
+      "rationale": "class 1 (5.2 Single phrases / Table 1): The 5.1 outcome vocabulary has no 'ambiguous' category, so the remainder of these cells is unexplained.",
+      "suggested_fix": "Define 'ambiguous' in 5.1 and state the remainder in the caption."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "3-of-6 & 3 & 99.2 & 82.4 & 50.8 & 0 & refused & 0",
+      "rationale": "class 1 (6 Custody Arrangements / Table 4): \"refused\" and \"0\" sit side by side unexplained; the 1% clause's scope is unclear.",
+      "suggested_fix": "Define cell conventions in the Table 4 caption."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "bursts far beyond it",
+      "rationale": "class 1 (4.1 Construction): \"burst\" is never defined; 5.1 later defines \"burn\" for the same thing.",
+      "suggested_fix": "Use one word, defined at first use."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "Fix a threshold $t$, a number of cards $n\\le 31$, and $k$.",
+      "rationale": "class 2 (3.1 / 4.1): n is phrase length in Section 3 and number of cards in Section 4 (phrase length becomes W).",
+      "suggested_fix": "Use W for phrase length throughout."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "The syndromes are linear and each $r_d$ has zero syndromes.",
+      "rationale": "class 2 (3.2 / 4.1 / 4.3): d means dropped-word count, digest-word count and a row index.",
+      "suggested_fix": "Keep d for digest words only."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "A party holding $h$ words of a",
+      "rationale": "class 2 (4.2 / 4.5): h was the header symbol and now counts held words; 264 is unexplained.",
+      "suggested_fix": "Rename the count and write 11*24=264."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "be a valid phrase of width $W=N+k$ whose data words are the",
+      "rationale": "class 2 (3.1 / 4.1 / 4.3): N is the mnemonic length in Section 3 but includes the digest in Section 4 (N=26).",
+      "suggested_fix": "Write W=N+d+k or state N=26 for grids."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "A protected phrase is",
+      "rationale": "class 2 (throughout): One object is called protected phrase, valid phrase, parity phrase, codeword, card, share, row, mnemonic; the secret is secret, seed, data words, entropy, key, phrase.",
+      "suggested_fix": "Fix one term per object."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "This models per-share correction.",
+      "rationale": "class 2 (Abstract, 5.1, 5.3, Fig. 2, Conclusion): Each of the three methods carries several names.",
+      "suggested_fix": "One label per method everywhere."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "a card counts only if it is exactly valid as",
+      "rationale": "class 2 (5.1 Setup): \"Checksum\" elsewhere means the BIP39 checksum; here it means parity used for detection.",
+      "suggested_fix": "Rename the baseline, e.g. 'Detect only'."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "When one card is from another dealing",
+      "rationale": "class 2 (5.1, 5.3, 6): \"wrong\" labels a fault, an outcome and a card; the foreign card has four names.",
+      "suggested_fix": "Reserve 'wrong' for the outcome; say 'foreign card' everywhere."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "makes a run of consecutive words unreadable",
+      "rationale": "class 2 (4.1, 5.1, 5.3, 6): burn / burnt / bursts / unreadable / missing / erasure; 'burnt' also used for a destroyed card.",
+      "suggested_fix": "Erasure for one word, burn for the run, destroyed for a card."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "A hidden header and a digest.",
+      "rationale": "class 2 (1 / 4.2): hidden / unprinted / never printed / never written.",
+      "suggested_fix": "Use 'unprinted header' throughout."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "A hidden header and a digest.",
+      "rationale": "class 3 (1 Introduction): The only contribution with no section pointer; the roadmap omits Sections 2, 4.5 and 8.",
+      "suggested_fix": "Add '(Sections 4.2 and 4.3)'."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "give the main result. Three",
+      "rationale": "class 4 (5.3 Grids / Figure 2): Figure 2 is discussed on page 6 but prints on page 8 inside Section 6; Table 2 prints a page late.",
+      "suggested_fix": "Place Figure 2 directly after 5.3 or add a float barrier."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "is not shown to reach this bound in every pattern",
+      "rationale": "class 5 (4.1 Construction): A performance claim about the decoder precedes the decoder (4.4) and the burn experiments (5.3).",
+      "suggested_fix": "Move the sentence to 4.4 or 5.3."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "and add the joint decoding",
+      "rationale": "class 5 (2 Related Work): Related Work compares 'our cards', 'our digest', joint decoding and parity words before they are constructed.",
+      "suggested_fix": "Move Related Work after Section 4 or defer the comparisons."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "in 28{,}000 trials it never returned a wrong",
+      "rationale": "class 6 (Abstract, 5.3, Tables 3-4, Conclusion): The no-wrong-secret claim is stated five times.",
+      "suggested_fix": "State once with breakdown; keep abstract and conclusion."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "Plan for one more card than the threshold to be present at recovery.",
+      "rationale": "class 6 (5.4, 6, 7, 9): The spare-card caveat is restated in full four times.",
+      "suggested_fix": "Keep the rule in Section 6; back-reference elsewhere."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "We give no formal proofs of the implementation and no handwriting data",
+      "rationale": "class 6 (1, 7): Same caveats recur in Limits (1), (3) and Open directions.",
+      "suggested_fix": "Shorten the intro to a pointer."
+    },
+    {
+      "severity": "nit",
+      "dimension": "7",
+      "evidence_span": "and a decoder that refuses instead of guessing",
+      "rationale": "class 6 (1 Introduction): Repeats 'reports ambiguity instead of guessing' a few lines earlier.",
+      "suggested_fix": "Drop one."
+    },
+    {
+      "severity": "nit",
+      "dimension": "7",
+      "evidence_span": "Two parity words repair a swap or a dropped word and four",
+      "rationale": "class 6 (9 Conclusion): Near-verbatim from 5.2 and restated in 'Choosing k'.",
+      "suggested_fix": "Keep in 5.2 and the conclusion only."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "margin: 83\\% at a 3\\% error rate",
+      "rationale": "class 7 (5.4 vs 6): Same configuration is 79% in 5.4/Table 2 and 83% in 6/Table 4, with no note that they are separate runs.",
+      "suggested_fix": "Say Table 4 is an independent 250-trial run."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "decoder recovers 90\\% (2-of-3) and 98.5\\% (3-of-5)",
+      "rationale": "class 7 (5.3, 5.4, 6): Mixed rounding of table values.",
+      "suggested_fix": "One precision throughout."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "61--67\\%",
+      "rationale": "class 7 (5.3 / Table 2): Table prints [67 / 61] in scheme order; text gives an ascending range.",
+      "suggested_fix": "Write 67% (2-of-3) and 61% (3-of-5)."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "when one word in ten was wrong",
+      "rationale": "class 7 (Abstract, 5.1, Table 2, 6): One parameter under five phrasings; '900-line' vs 'about 900 lines'.",
+      "suggested_fix": "Use 'word error rate of 10%' consistently."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "gains little over per-card repair with one spare card (2-of-3)",
+      "rationale": "class 7 (Figure 2 caption): 'Gains little' sits beside a 61.2 vs 40.7 gap at 10%.",
+      "suggested_fix": "Quantify the gain."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "That is the claim of this paper.",
+      "rationale": "class 9 (1 Introduction): The problem statement arrives only in the second paragraph.",
+      "suggested_fix": "Consider swapping the first two paragraphs."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "A tempting shortcut is to encode once with large $k$ and hand each party a",
+      "rationale": "class 9 (4.5): The argument for needing grid shares comes after their construction.",
+      "suggested_fix": "Move 4.5 to the start of Section 4."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "Grids use 24 seed words, 2 digest words and $k=4$ unless stated.",
+      "rationale": "class 9 (5.1 Setup): One paragraph carries defaults, four fault definitions and the baseline lead-in.",
+      "suggested_fix": "Split into a fault-model list and a methods list."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "The command-line tool exposes",
+      "rationale": "class 9 (8 Reproducibility): A command listing sits between Discussion and Conclusion.",
+      "suggested_fix": "Move after the Conclusion or to an appendix."
+    }
+  ],
+  "critical_flags": [],
+  "total": null,
+  "threshold": null,
+  "verdict": null
+}

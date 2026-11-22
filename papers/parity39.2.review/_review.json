@@ -1,0 +1,181 @@
+{
+ "schema_version": "1",
+ "kind": "judgment",
+ "version_dir": "parity39.2",
+ "critic_id": "paper-review",
+ "model": "claude-fable-5-2",
+ "rubric": "anvil-pub-v2",
+ "scores": [
+  {
+   "dimension": "1",
+   "score": 5,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Rigor of method / argument: The restated proposition is correct and matches the code: (\"Every $c_i$ is a valid codeword of length $W+1$\" — §4.1 Prop. 1a) follows from linearity with the header vector u (`Grid.headerOffset`, `Grid.applyHeader`), the k+1 / k row distances and the stripped-card product distance check out, and the digest sentence reproduces `Grid.digestWords` (test vector recomputed: siege, say). One point is withheld for three loose ends: the false-accept bound counts the subsets but not the first reconstruction and is asserted as \"at most\" without the random-hash assumption (S3), the swap estimate in §3.2 turns on a \"so\" that does not follow (S7), and the decoder remains a heuristic whose row stage can confirm a wrong card, with safety resting on the 22-bit digest."
+  },
+  {
+   "dimension": "2",
+   "score": 4,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Evidence sufficiency: Every cell of Tables 1-4 and every point of Fig. 2 matches the stored logs, 31,600 is exact, and the added baseline, swap rows and rule-of-three bound close the round-one gaps. Two weaknesses remain. The no-digest ablation is used but not shown and is summarised one-sidedly: (\"Joint decoding without the digest does not\" — §5.3) is supported for 2-of-3 and for exactly t cards, while the same log has the no-digest grid decoder recovering 100% of 3-of-5 foreign-card trials with all five cards (S1). And all evidence is one seed of 200-400 trials per cell under independent uniform substitutions, with no trial of a mislabelled card, a foreign card with illegible numbers, or similar-word confusions (S6)."
+  },
+  {
+   "dimension": "3",
+   "score": 5,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Clarity of contribution: The organising idea opens the paper (\"Shares of a secret can repair themselves and each other, at the level where people make mistakes: whole words\" — §1), the three contributions are itemised with section pointers, inherited ingredients are labelled, and the abstract now carries the 2-of-3 and exactly-t cases beside the best cell. It matches the brief's strongest claim; no underclaiming or buried lede."
+  },
+  {
+   "dimension": "4",
+   "score": 4,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Related-work positioning: SLIP39's identifier and digest, SSKR, codex32's identifier, information dispersal and verifiable sharing are now described, and the paper states its increment plainly: (\"All three defend against mixing shares of different sets, and all three decode each share on its own\" — §2). One point is withheld because no litsearch sibling backs the section and one lead is open: an existing tool that writes Shamir shares as BIP39 words (S8, reviewer recall, unverified offline)."
+  },
+  {
+   "dimension": "5",
+   "score": 3,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Reproducibility: Commands, seed, toolchain and verbatim logs are given, and the 15 SHA-256 digests in `refs/experiments/README.txt` match the current tree (re-hashed this pass). But the paper itself says (\"The tree is not yet published at a public address\" — §8), the recorded base commit carries \"uncommitted changes\", and a reader of the PDF cannot obtain the code, the logs or the README. Digests pin a tree that nobody outside can fetch; an independent group can re-implement from the text but cannot rerun the tables (S2)."
+  },
+  {
+   "dimension": "6",
+   "score": 3,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Figure & table quality: Fig. 1 no longer overprints and Fig. 2 is clear with a correct caption. Remaining: Table 1's caption (\"means no candidate was offered in any trial, with or without the filter\" — Table 1) is contradicted by its own footnote a; Table 2 omits the fifth strategy that §5.3 quotes; percentages are truncated by the harness, so \"33 / 40.2 [67 / 59.7]\" leaves 0.1% that the caption says was refused; the header labels in Fig. 1 run through the right edge of their dashed boxes (S9)."
+  },
+  {
+   "dimension": "7",
+   "score": 2,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Prose & structural quality: Capped at 2 by the reader-flow rule: three confirmed define-before-use defects remain in the body. \"joint decoding\" is the paper's central term and is never defined or equated with the \"Grid\" column (first body use: \"(2-of-3) joint decoding matches per-card repair up to 5\\% and gains 20 points\" — Fig. 2 caption); \"the row decoder\" is used at L282 before §4.4; the \"numbers illegible\" row has no entry in the fault list of §5.1. Sentence-level prose is clean: no AI-tell adjectives, no overfull boxes, no unresolved references, no audience-fit hits. Without the cap this dimension would score 3 (naming drift over a dozen labels for three methods; five symbols rebound between §3 and §4)."
+  },
+  {
+   "dimension": "8",
+   "score": 4,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Citation hygiene: All 21 cited keys resolve, no entry is uncited, years and entry types are fixed, and the unsourced words-versus-characters claim is gone. One point withheld: the statistical rule is named without a source (\"bounds the rate of wrong answers under these fault models below about $10^{-4}$ at 95\\% confidence\" — §5.3), and the claims about SLIP39, SSKR and codex32 rest on specification URLs with no on-disk copy for the audit to check."
+  },
+  {
+   "dimension": "9",
+   "score": 3,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Rhetorical economy: The argument is stated early and the prose is spare, but the paper is 13 pages against the brief's 10 and repeats itself: the no-wrong-secret result appears five times (abstract, §5.3, captions of Tables 3 and 4, and \"returned no wrong secret in 31{,}600 trials\" — §9), the exactly-t caveat six times, and the assumed-error-rate caveat four times (S11)."
+  }
+ ],
+ "findings": [
+  {
+   "severity": "major",
+   "dimension": "2",
+   "evidence_span": "main.tex:L514-L521",
+   "rationale": "S1: the harness runs five strategies; the paper lists and tabulates four, then quotes the fifth (grid without digest) only where it fails. The same logs show it recovering 100% of foreign-card trials with two or more spare cards and refusing with one.",
+   "suggested_fix": "List five methods, add the 'Grid, no digest' column to Table 2, and restate the result as: no spare card, wrong secret; one spare, refusal; two or more, recovery."
+  },
+  {
+   "severity": "major",
+   "dimension": "5",
+   "evidence_span": "main.tex:L669-L673",
+   "rationale": "S2 (R9 open): the source tree is unpublished and uncommitted; the SHA-256 list in refs/experiments/README.txt matches the working tree but pins a tree no reader can fetch.",
+   "suggested_fix": "Publish the repository and cite URL and commit, or archive sources, wordlist, logs and README with the paper and cite the archive."
+  },
+  {
+   "severity": "major",
+   "dimension": "1",
+   "evidence_span": "main.tex:L303-L308",
+   "rationale": "S3: the union bound omits the first joint reconstruction (C(m,t)+1 candidates), does not state the random-hash assumption, is two orders below what the experiments can confirm, and gives no per-attempt figure for a holder who alters a card (L633-L635).",
+   "suggested_fix": "Count C(m,t)+1, add 'modelling SHA-256 as a random function', say the measured 1e-4 bound does not test the design bound, and state 2^-22 per attempt in §7."
+  },
+  {
+   "severity": "major",
+   "dimension": "2",
+   "evidence_span": "main.tex:L405-L411",
+   "rationale": "S4: 'Two parity words repair a swap or a dropped word' holds at 99.5-100% only with the BIP39 filter (84.5-96.5% unique without); 'beyond the capacity of k = 2' omits the k = 3 refusals; Table 1's caption defines Refused as no candidate in any trial while footnote a reports wrong candidates in those cells. The unqualified claim recurs at L698.",
+   "suggested_fix": "Qualify the sentences with the filter condition, write 'beyond the capacity (2)', and reword the caption to 'in any trial with the filter; see note a'."
+  },
+  {
+   "severity": "major",
+   "dimension": "2",
+   "evidence_span": "main.tex:L285-L287",
+   "rationale": "S6: single seed, 200-400 trials per cell, uniform independent substitutions; no scenario with a mislabelled card or a foreign card with illegible numbers; the implementation's handling of a wrong label (corrected as a symbol error at the cost of two parity words) is not described.",
+   "suggested_fix": "Add mislabelled-card and foreign-plus-illegible scenarios to gridtests and describe the wrong-label behaviour in §4.2."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "main.tex:L487",
+   "rationale": "S10: confirmed define-before-use in the body: 'joint decoding' is never defined or tied to the Grid method; 'the row decoder' (L282) precedes §4.4; the 'numbers illegible' fault (L468) is missing from the fault list; the subset fallback (L305-L308) is described before the decoder.",
+   "suggested_fix": "Define joint decoding in §4.4 and equate it with Grid at L392; write 'the single-card repair of Section 3' at L282; add the illegible-number fault to §5.1; move the subset fallback into step 5."
+  },
+  {
+   "severity": "minor",
+   "dimension": "2",
+   "evidence_span": "main.tex:L688-L689",
+   "rationale": "S5: 'five grid files' where there are six; 3,600 of the 31,600 trials (k = 6, 8 rows for 1%, foreign and swap) appear in no table.",
+   "suggested_fix": "Give the sum 13,600 + 6,000 + 12,000 over six files and report or acknowledge the untabulated rows."
+  },
+  {
+   "severity": "minor",
+   "dimension": "1",
+   "evidence_span": "main.tex:L188-L194",
+   "rationale": "S7: the swap estimate is arithmetically right (325 x 26/2047 = 4.1) but 'A swap leaves S_0 unchanged, so ...' does not follow as written; premises unstated.",
+   "suggested_fix": "State that S_0 is non-zero and unchanged, S_1 changes with each hypothesised swap, S_1/S_0 is treated as uniform, and call the figure an estimate; cross-reference Table 1 footnote a (1.5%)."
+  },
+  {
+   "severity": "minor",
+   "dimension": "4",
+   "evidence_span": "main.tex:L97-L108",
+   "rationale": "S8 (related-work lead, unverified): an existing tool (Shamir39) writes Shamir shares as BIP39 words; if it shares in an 11-bit field it is the closest prior use of the paper's observation for sharing.",
+   "suggested_fix": "Re-run paper-litsearch; if confirmed add one sentence to 'Shared mnemonics'."
+  },
+  {
+   "severity": "minor",
+   "dimension": "6",
+   "evidence_span": "main.tex:L445-L449",
+   "rationale": "S9: harness percentages are truncated, so 40.2 + 59.7 = 99.9 under a caption saying all other trials were refused; Table 3's caption does not name the method; Fig. 1 header labels overflow their dashed boxes.",
+   "suggested_fix": "State truncation or round; name the grid decoder in Table 3's caption; widen the hdr style in figures/grid.tex."
+  },
+  {
+   "severity": "minor",
+   "dimension": "9",
+   "evidence_span": "main.tex:L698-L704",
+   "rationale": "S11: the no-wrong-secret result appears five times, the exactly-t caveat six times, the assumed-error-rate caveat four times; 13 pages against the brief's 10.",
+   "suggested_fix": "Keep each statement once in the body and once in the abstract or conclusion; move the command list to an appendix."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L329-L332",
+   "rationale": "S12: rescue step requires agreement with another unconfirmed card (code) not 'another card'; Prop. 1 wording ('two different cards with the same number', 'holders'); L rebound from N+k to W+1; naming drift across about a dozen method labels; rule of three uncited; S_1 weights by alpha^p.",
+   "suggested_fix": "Apply the one-clause fixes listed under Minor in comments.md."
+  }
+ ],
+ "critical_flags": [],
+ "total": 33,
+ "threshold": 35,
+ "verdict": "REVISE"
+}

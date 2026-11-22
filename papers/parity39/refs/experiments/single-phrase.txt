@@ -1,0 +1,85 @@
+# lake exe tests 200
+pass  alpha has order 2047 = 23 * 89
+pass  every nonzero element has an inverse
+pass  multiplication is commutative, associative, distributive (sampled)
+pass  sha256("")
+pass  sha256("abc")
+pass  wordlist has 2048 words
+pass  bip39 vector 00000000… (12 words)
+pass  bip39 vector 7f7f7f7f… (12 words)
+pass  bip39 vector 80808080… (12 words)
+pass  bip39 vector ffffffff… (12 words)
+pass  bip39 vector 00000000… (24 words)
+pass  RS corrects e errors + s erasures whenever 2e + s ≤ k (1280 trials, k = 1…8)
+
+12+2   (200 trials per row)      parity only               | parity + BIP39 checksum
+                            unique  ambig.   wrong refused |  unique  ambig.   wrong refused
+  1 wrong word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 wrong words               0.0%    0.0%    0.0%  100.0% |    0.0%    0.0%    0.0%  100.0%
+  2 unreadable (marked ?)   100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  adjacent swap              94.0%    6.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  swap, any two words        96.5%    3.5%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 dropped word             99.0%    1.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 dropped words             0.0%  100.0%    0.0%    0.0% |    1.0%   99.0%    0.0%    0.0%
+  1 wrong + 1 dropped         0.0%    0.0%    0.5%   99.5% |    0.0%    0.0%    0.0%  100.0%
+  1 extra word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+
+12+3   (200 trials per row)      parity only               | parity + BIP39 checksum
+                            unique  ambig.   wrong refused |  unique  ambig.   wrong refused
+  1 wrong word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 wrong words               0.0%    0.0%    0.0%  100.0% |    0.0%    0.0%    0.0%  100.0%
+  2 unreadable (marked ?)   100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  adjacent swap             100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  swap, any two words       100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 dropped word            100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 dropped words            96.0%    4.0%    0.0%    0.0% |   99.5%    0.5%    0.0%    0.0%
+  1 wrong + 1 dropped        92.5%    7.5%    0.0%    0.0% |   99.5%    0.5%    0.0%    0.0%
+  1 extra word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+
+12+4   (200 trials per row)      parity only               | parity + BIP39 checksum
+                            unique  ambig.   wrong refused |  unique  ambig.   wrong refused
+  1 wrong word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 wrong words             100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 unreadable (marked ?)   100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  adjacent swap             100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  swap, any two words       100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 dropped word            100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 dropped words           100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 wrong + 1 dropped       100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 extra word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+
+24+2   (200 trials per row)      parity only               | parity + BIP39 checksum
+                            unique  ambig.   wrong refused |  unique  ambig.   wrong refused
+  1 wrong word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 wrong words               0.0%    0.0%    1.5%   98.5% |    0.0%    0.0%    0.0%  100.0%
+  2 unreadable (marked ?)   100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  adjacent swap              87.0%   13.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  swap, any two words        84.5%   15.5%    0.0%    0.0% |   99.5%    0.5%    0.0%    0.0%
+  1 dropped word             99.5%    0.5%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 dropped words             0.0%  100.0%    0.0%    0.0% |   30.0%   70.0%    0.0%    0.0%
+  1 wrong + 1 dropped         0.0%    0.0%    1.5%   98.5% |    0.0%    0.0%    0.0%  100.0%
+  1 extra word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+
+24+3   (200 trials per row)      parity only               | parity + BIP39 checksum
+                            unique  ambig.   wrong refused |  unique  ambig.   wrong refused
+  1 wrong word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 wrong words               0.0%    0.0%    0.0%  100.0% |    0.0%    0.0%    0.0%  100.0%
+  2 unreadable (marked ?)   100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  adjacent swap             100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  swap, any two words       100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 dropped word            100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 dropped words            82.0%   18.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 wrong + 1 dropped        76.0%   24.0%    0.0%    0.0% |   99.5%    0.5%    0.0%    0.0%
+  1 extra word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+
+24+4   (200 trials per row)      parity only               | parity + BIP39 checksum
+                            unique  ambig.   wrong refused |  unique  ambig.   wrong refused
+  1 wrong word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 wrong words             100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 unreadable (marked ?)   100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  adjacent swap             100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  swap, any two words       100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 dropped word            100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  2 dropped words           100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 wrong + 1 dropped       100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%
+  1 extra word              100.0%    0.0%    0.0%    0.0% |  100.0%    0.0%    0.0%    0.0%

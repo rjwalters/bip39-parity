@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "thread": "parity39",
+  "phases": {
+    "revise": {
+      "state": "done",
+      "started": "2026-11-22T19:10:00Z",
+      "completed": "2026-11-22T18:51:15Z"
+    },
+    "figures": {
+      "state": "done",
+      "started": "2026-11-22T19:10:00Z",
+      "completed": "2026-11-22T18:51:15Z"
+    }
+  },
+  "metadata": {
+    "iteration": 3,
+    "max_iterations": 4,
+    "revised_from": 2,
+    "evidence_snapshot": {
+      "brief_mtime": 1795371150.2278576,
+      "refs_mtime": 1795372583.6701245
+    }
+  }
+}

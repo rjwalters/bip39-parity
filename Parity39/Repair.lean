@@ -22,6 +22,8 @@ structure Candidate where
   notes : Array String
   /-- BIP39 checksum of the data words, if they have a BIP39 length. -/
   bip39 : Option Bool
+  /-- Decoded values of the unprinted suffix symbols (see `repair`). -/
+  virt : Array UInt16 := #[]
   deriving Inhabited
 
 /-- All sorted `d`-element subsets of `{0, …, n-1}`. -/
@@ -100,32 +102,43 @@ With `requireBip39`, candidates whose data words fail the BIP39 checksum are
 discarded before the minimum is taken.
 -/
 def repair (k n : Nat) (toks : Array (Option UInt16)) (requireBip39 : Bool)
-    (maxEdits : Nat := 3) : Array Candidate := Id.run do
+    (maxEdits : Nat := 3) (suffix : Array (Option UInt16) := #[]) : Array Candidate := Id.run do
+  -- `suffix` holds symbols that belong to the codeword but are not printed
+  -- (positions n, n+1, …): `some v` if known from elsewhere, `none` to solve for.
   let mut found : Array Candidate := #[]
+  let mut best := maxEdits + k + 1
   for h in hypotheses n toks maxEdits do
+    if h.cost > best then continue
     -- A swap is invisible to S₀ and there are n(n-1)/2 of them, so a swap plus
     -- further substitutions is only accepted when two syndromes stay in reserve.
     let maxErrors := if h.isSwap then (k - 2) / 2 else k
-    match RS.decode k h.recv maxErrors with
+    match RS.decode k (h.recv ++ suffix) maxErrors with
     | none => pure ()
     | some d =>
       let mut notes := h.notes
       for p in d.erasures do
-        let verb := if h.restored.contains p then "restored dropped word" else "filled in"
-        notes := notes.push s!"{verb} {q d.codeword[p]!} at position {p + 1}"
+        if p < n then
+          let verb := if h.restored.contains p then "restored dropped word" else "filled in"
+          notes := notes.push s!"{verb} {q d.codeword[p]!} at position {p + 1}"
       for p in d.errors do
-        notes := notes.push
-          s!"replaced {q (h.recv[p]!.getD 0)} with {q d.codeword[p]!} at position {p + 1}"
+        if p < n then
+          notes := notes.push
+            s!"replaced {q (h.recv[p]!.getD 0)} with {q d.codeword[p]!} at position {p + 1}"
+        else
+          notes := notes.push "the card's label does not match its words"
       let cand : Candidate :=
-        { phrase := d.codeword, cost := h.cost + d.errors.size, notes,
-          bip39 := Bip39.checksumOk (d.codeword.extract 0 (n - k)) }
+        { phrase := d.codeword.extract 0 n, cost := h.cost + d.errors.size, notes,
+          bip39 := Bip39.checksumOk (d.codeword.extract 0 (n - k)),
+          virt := d.codeword.extract n d.codeword.size }
       if requireBip39 && cand.bip39 != some true then
         pure ()
       else
-        match found.findIdx? (·.phrase == cand.phrase) with
+        best := min best cand.cost
+        match found.findIdx? (fun c => c.phrase == cand.phrase && c.virt == cand.virt) with
         | some i => if cand.cost < found[i]!.cost then found := found.set! i cand
         | none => found := found.push cand
-  let best := found.foldl (fun m c => min m c.cost) (maxEdits + k + 1)
+        -- an exactly valid phrase cannot be beaten or tied by any edit
+        if cand.cost == 0 then return #[cand]
   return found.filter (·.cost == best)
 
 end Parity39.Repair

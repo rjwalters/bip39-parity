@@ -1,0 +1,286 @@
+{
+  "schema_version": "1",
+  "kind": "judgment",
+  "version_dir": "parity39.1",
+  "critic_id": "paper-review",
+  "model": "claude-fable-5-2",
+  "rubric": "anvil-pub-v2",
+  "scores": [
+    {
+      "dimension": "1",
+      "score": 4,
+      "max": 6,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Rigor of method / argument: The algebra is sound (code, distance k+1, Prop. 1 b-d, ramp arithmetic and the Lean field/RS code all check out), but the central statement about cards is false for the cards actually printed: Prop. 1(a) and Fig. 1 say a card satisfies the syndrome equations, then §4.2 says (\"The printed parity words are computed over the data words and this header\" — §4.2), so a printed card is a codeword only of the length-W+1 code. The digest definition in §4.3 does not match `Grid.digestWords`, the 2^-11d false-accept figure ignores the t-subset search, and the decoder's safety rests on a heuristic with no stated miscorrection bound."
+    },
+    {
+      "dimension": "2",
+      "score": 3,
+      "max": 6,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Evidence sufficiency: Every table cell matches the harness logs, but several claims outrun them: the safety headline (\"returned no wrong secret\" — §5.3) is given with no upper bound (zero in 28,000 bounds the rate only near 1e-4, and at 0.75% per 400-trial cell); the foreign-card comparison withholds the digest from both baselines although the logs show joint decoding without the digest does no better; the 97.6% figure in §3.2 has no artifact; grids are never tested with swapped words, the motivating human error; and the header and dropped-word rows that were run are not reported."
+    },
+    {
+      "dimension": "3",
+      "score": 4,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Clarity of contribution: The paper opens on its organizing idea (\"That is the claim of this paper.\" — §1) and separates inherited ingredients from the new arrangement, so each contribution is extractable in a sentence. One point off because the abstract's single quantitative comparison is the most favourable cell of Table 2 and the third contribution (header and digest) has no section pointer and no reported measurement."
+    },
+    {
+      "dimension": "4",
+      "score": 3,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Related-work positioning: The closest formats are cited, but SLIP39 is described only as (\"protects each share with a three-word RS1024 checksum that its specification uses for detection\" — §2); its share-set identifier and its digest of the shared secret, which address exactly the foreign-card failure the paper charges to per-share schemes, are not mentioned. Robust secret sharing, information dispersal and SSKR are absent; no litsearch sibling exists, so the score rests on the prose alone."
+    },
+    {
+      "dimension": "5",
+      "score": 3,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Reproducibility: Commands, toolchain and RNG seed are given and the logs are stored, but the paper points only to (\"All numbers come from the accompanying source tree\" — §8) with no URL, commit or archive; the one hash recorded with the logs predates the grid code, which is uncommitted. The digest and rescue step are under-specified relative to the code, and no test vectors are given, so an independent implementation would not interoperate."
+    },
+    {
+      "dimension": "6",
+      "score": 2,
+      "max": 4,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Figure & table quality: Captions are self-contained, but Fig. 1 overprints its own labels in the PDF (the column arrow and \"each column: Shamir\" box cover \"share words\"; \"k parity words\" runs into \"header\"), Fig. 2 prints two pages after its discussion and its caption's (\"Joint decoding gains little over per-card repair with one spare card\" — Fig. 2 caption) sits beside a 20-point gap at 10%. Table 1 hides the ambiguous and unfiltered outcomes its text discusses, Table 4 mixes \"0\" and \"refused\", and no table or plot carries an uncertainty."
+    },
+    {
+      "dimension": "7",
+      "score": 2,
+      "max": 4,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Prose & structural quality: Sentence-level prose is clean and free of AI tells, and the build log has no overfull boxes or unresolved references. Capped at 2 by the reader-flow rule: more than three confirmed define-before-use defects remain in the body, among them (\"the original is the unique valid phrase within reach whenever\" — §3.1), \"dealing\", \"seed\", the 30-word card used before §4.3, the unexplained 32 in the header, and \"bursts\" before \"burn\"; symbols n, N, d and h each change meaning between Sections 3 and 4."
+    },
+    {
+      "dimension": "8",
+      "score": 3,
+      "max": 5,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Citation hygiene: All `\\cite` keys resolve. Deductions: an empirical claim with no source (\"Our cards use dictionary words, which resist transcription slips better than character strings\" — §2); RAID-6 P/Q attributed to a paper that defines levels 1-5; and `refs.bib` carries wrong years (Blakley-Meadows and Krawczyk as 2007), proceedings typed as `@article` with \"Lecture Notes in Computer Science\" as journal, and one uncited entry."
+    },
+    {
+      "dimension": "9",
+      "score": 3,
+      "max": 4,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "Rhetorical economy: Ten pages with the claim in the first sentence and little padding. One point off for full restatements: the no-wrong-secret claim appears five times and the spare-card rule four (\"Plan for one more card than the threshold to be present at recovery.\" — §6), and §8 repeats setup material from §5.1."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "major",
+      "dimension": "1",
+      "evidence_span": "main.tex:L213",
+      "rationale": "R1: Prop. 1(a), Fig. 1 caption and the introduction say a card satisfies Eq. (1); the printed card includes the header contribution (Grid.applyHeader) and is a codeword only as a W+1-symbol word.",
+      "suggested_fix": "Define the card with its header before Prop. 1, restate (a) for the extended word, and give the row distance with the number known (k+1) and unknown (k)."
+    },
+    {
+      "severity": "major",
+      "dimension": "2",
+      "evidence_span": "main.tex:L392-L395",
+      "rationale": "R2: Baselines are run without the digest; the logs' no-digest grid column shows joint decoding alone returns wrong secrets or refuses in the foreign-card rows, so the result belongs to the digest.",
+      "suggested_fix": "Report the no-digest grid column, add a card-parity-plus-digest baseline, and reword 5.3 and the conclusion."
+    },
+    {
+      "severity": "major",
+      "dimension": "4",
+      "evidence_span": "main.tex:L96-L98",
+      "rationale": "R3: SLIP39's share-set identifier and digest of the shared secret, and codex32's identifier, are not described although they address the foreign-card case charged to per-share schemes.",
+      "suggested_fix": "Describe these mechanisms in Related Work and present the foreign-card rows as 'linear checks alone'."
+    },
+    {
+      "severity": "major",
+      "dimension": "2",
+      "evidence_span": "main.tex:L397-L398",
+      "rationale": "R4: Zero wrong secrets in 28,000 trials is reported with no upper bound (about 1.1e-4 pooled, 0.75% per 400-trial cell), no breakdown, and no mention that card parity returned a wrong secret in the illegible-number row.",
+      "suggested_fix": "State the bound, the breakdown of 28,000 and the scope of the fault mix."
+    },
+    {
+      "severity": "major",
+      "dimension": "1",
+      "evidence_span": "main.tex:L262-L264",
+      "rationale": "R5: 'first d 11-bit groups of SHA-256' differs from Grid.digestWords, which takes the low 11 bits of successive big-endian 16-bit groups.",
+      "suggested_fix": "Align text and code and add a test vector."
+    },
+    {
+      "severity": "major",
+      "dimension": "2",
+      "evidence_span": "main.tex:L178-L181",
+      "rationale": "R6: The 97.6% development figure has no log, trial count or harness switch.",
+      "suggested_fix": "Add the ablation to the harness and logs, or replace with a labelled estimate, or delete."
+    },
+    {
+      "severity": "major",
+      "dimension": "2",
+      "evidence_span": "main.tex:L324-L337",
+      "rationale": "R7: No grid scenario swaps words within a card, although swaps are the motivating human error and cards cannot use the BIP39 checksum filter.",
+      "suggested_fix": "Add a swap scenario to gridtests or state that it is untested."
+    },
+    {
+      "severity": "major",
+      "dimension": "2",
+      "evidence_span": "main.tex:L412-L425",
+      "rationale": "R8: Illegible-number, dropped-word and garbage rows exist in grid-main-k4.final but are not reported; the header contribution has no reported measurement.",
+      "suggested_fix": "Add the three rows to Table 2."
+    },
+    {
+      "severity": "major",
+      "dimension": "5",
+      "evidence_span": "main.tex:L571-L574",
+      "rationale": "R9: No URL, commit or archive for the source; the recorded hash predates Grid.lean and GridTests.lean.",
+      "suggested_fix": "Cite a public URL and the exact commit that produced the logs."
+    },
+    {
+      "severity": "major",
+      "dimension": "8",
+      "evidence_span": "main.tex:L50-L54",
+      "rationale": "R10: The cited study measures recall from memory; the sentence sits in a transcription argument and does not say so, and the 14 of 41 are budget-limited recoverable attempts.",
+      "suggested_fix": "Say what was measured and limit the inference to the shape of word errors."
+    },
+    {
+      "severity": "major",
+      "dimension": "3",
+      "evidence_span": "main.tex:L32-L34",
+      "rationale": "R11: The abstract's only comparison is the most favourable cell (3-of-5, all cards, 10%).",
+      "suggested_fix": "Add one clause on 2-of-3 or the exactly-t case and say 10% is assumed."
+    },
+    {
+      "severity": "major",
+      "dimension": "1",
+      "evidence_span": "main.tex:L265-L268",
+      "rationale": "R12: 2^-11d is per candidate; the t-subset fallback multiplies it by C(m,t), and step 5 error-corrects the interpolated row rather than only verifying it.",
+      "suggested_fix": "State the union bound and describe step 5 as implemented."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "main.tex:L188-L190",
+      "rationale": "R13: n, N, d and h change meaning between Sections 3 and 4.",
+      "suggested_fix": "Use W for phrase length, keep N for mnemonic length, index rows by j."
+    },
+    {
+      "severity": "major",
+      "dimension": "7",
+      "evidence_span": "main.tex:L140-L141",
+      "rationale": "R14: Eight define-before-use defects in the body (within reach, seed, dealing, 30-word card, bursts, the constant 32, unfiltered numbers and 'ambiguous', '0' vs 'refused').",
+      "suggested_fix": "Define each at or before first use; see comments.md."
+    },
+    {
+      "severity": "major",
+      "dimension": "6",
+      "evidence_span": "figures/grid.tex:L34-L38",
+      "rationale": "R15: In the compiled PDF the column arrow and its label overprint 'share words' and two top labels collide.",
+      "suggested_fix": "Move the column annotation outside the grid and separate the top labels."
+    },
+    {
+      "severity": "major",
+      "dimension": "4",
+      "evidence_span": "main.tex:L102-L117",
+      "rationale": "R16: Robust secret sharing, information dispersal and SSKR are not cited; the words-vs-characters claim is unsourced; RAID-6 is attributed to a paper defining levels 1-5.",
+      "suggested_fix": "Re-run paper-litsearch for these and fix the two citations."
+    },
+    {
+      "severity": "minor",
+      "dimension": "1",
+      "evidence_span": "main.tex:L236-L238",
+      "rationale": "'bursts far beyond it' compares an error bound with erasures.",
+      "suggested_fix": "Compare erasures with the erasure guarantee."
+    },
+    {
+      "severity": "minor",
+      "dimension": "1",
+      "evidence_span": "main.tex:L300-L307",
+      "rationale": "'unsafe' is not shown by the 24-word arithmetic (124 bits remain).",
+      "suggested_fix": "Argue from the missing threshold and the 12-word case."
+    },
+    {
+      "severity": "minor",
+      "dimension": "2",
+      "evidence_span": "main.tex:L338-L339",
+      "rationale": "Half-width given for 400 trials only; other tables use 200, 250, 300.",
+      "suggested_fix": "Give 6.9, 6.2 and 5.7 points respectively."
+    },
+    {
+      "severity": "minor",
+      "dimension": "7",
+      "evidence_span": "main.tex:L509",
+      "rationale": "Same configuration quoted as 79% (5.4) and 83% (6) from separate runs with no bridge.",
+      "suggested_fix": "Add one bridging sentence."
+    },
+    {
+      "severity": "minor",
+      "dimension": "2",
+      "evidence_span": "main.tex:L348",
+      "rationale": "'13--15%' is 13.0 and 15.5 in the log; percentages are truncated by the harness.",
+      "suggested_fix": "Write 13-16% and note truncation or round."
+    },
+    {
+      "severity": "minor",
+      "dimension": "6",
+      "evidence_span": "main.tex:L353-L375",
+      "rationale": "Table 1 omits parity-only and ambiguous outcomes that the text relies on.",
+      "suggested_fix": "Add the columns."
+    },
+    {
+      "severity": "minor",
+      "dimension": "6",
+      "evidence_span": "main.tex:L430-L438",
+      "rationale": "Fig. 2 prints two pages after its discussion; no uncertainty shown; 'gains little' unquantified.",
+      "suggested_fix": "Fix placement, add intervals, quantify."
+    },
+    {
+      "severity": "minor",
+      "dimension": "5",
+      "evidence_span": "main.tex:L289-L291",
+      "rationale": "Rescue-step conditions (>= 3 guessed positions, k >= 3, <= 14 open columns) are not stated.",
+      "suggested_fix": "State them."
+    },
+    {
+      "severity": "minor",
+      "dimension": "8",
+      "evidence_span": "refs.bib",
+      "rationale": "Wrong years for Blakley-Meadows and Krawczyk; proceedings typed as @article; one uncited entry.",
+      "suggested_fix": "Correct the entries."
+    },
+    {
+      "severity": "minor",
+      "dimension": "9",
+      "evidence_span": "main.tex:L397-L398",
+      "rationale": "No-wrong-secret claim stated five times; spare-card rule four times.",
+      "suggested_fix": "State each once in the body plus abstract and conclusion."
+    },
+    {
+      "severity": "nit",
+      "dimension": "5",
+      "evidence_span": "figures/rates.tex:L1",
+      "rationale": "Comment names the empty run grid-main-k4.txt.",
+      "suggested_fix": "Point to grid-main-k4.final."
+    }
+  ],
+  "critical_flags": [],
+  "total": 27,
+  "threshold": 35,
+  "verdict": "REVISE"
+}

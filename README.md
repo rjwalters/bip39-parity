@@ -65,11 +65,44 @@ is among the candidates shown). The dangerous outcome, offering only a wrong
 phrase, appeared only for faults beyond a k = 2 code's capacity, without the
 BIP39 filter, in 0.5–1.5% of trials.
 
-## Not secret sharing
+## Grid shares: Shamir across cards, parity along each card
+
+Experimental (`Parity39/Grid.lean`). `split` deals `n` cards of which any `t`
+recover the seed; fewer reveal nothing. Each card is the seed's share plus
+digest words plus `k` parity words, so a card repairs its own word-level damage
+and the cards are also decoded jointly, column by column.
+
+    lake exe parity39 split   -k 4 -t 2 -n 3 <24 seed words>
+    lake exe parity39 combine -k 4 -t 2 <card> / 3: <card> / …
+
+- A card's number and the threshold are carried by an unprinted symbol covered
+  by the parity words, so a card identifies itself at no cost in length.
+- Two digest words (a hash of the seed, shared like the rest) check any
+  reconstruction; a linear code alone cannot tell a wrong-but-valid set of
+  cards from the right one.
+
+`lake exe gridtests [trials] [scenario filter] [k]` runs the fault-injection
+experiments. With k = 4 and 400 trials per cell, percentage of correct
+recoveries (2-of-3 / 3-of-5):
+
+| Scenario | Checksum only | Card parity only | Grid + digest |
+|---|---|---|---|
+| All cards, 3% of words wrong | 33 / 36 | 99.2 / 99.5 | 99.7 / 100 |
+| All cards, 10% of words wrong | 1 / 0 | 41 / 36 | 61 / 99.7 |
+| All cards, 5 unreadable words in a row on each | 0 / 0 | 0 / 0 | 90 / 98.5 |
+| All cards, one swapped for a card from another set | 33 / 39, rest wrong | 33 / 39, rest wrong | 100 / 100 |
+| Only t cards, 3% of words wrong | 17 / 6 | 88 / 79 | 88 / 79 |
+| Only t cards, one from another set | 0, all wrong | 0, all wrong | refused |
+
+With exactly `t` cards there is no cross-card redundancy, so only `k` helps:
+at 3% wrong words, k = 6 gives 96 / 95 and k = 8 gives 99 / 99.6 (300 trials).
+
+## Splitting one phrase is not secret sharing
 
 Splitting a high-parity phrase among several parties is a *ramp* scheme, not
-Shamir: every word a party holds reveals 11 bits of the secret. See the notes in
-the design discussion before using it that way.
+Shamir: every word a party holds reveals 11 bits of the secret. See
+[docs/threat-model-and-ux.md](docs/threat-model-and-ux.md), section 5, before
+using it that way.
 
 ## Layout
 

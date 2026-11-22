@@ -1,0 +1,37 @@
+{
+  "schema_version": "1",
+  "kind": "tool_evidence",
+  "version_dir": "parity39.1",
+  "critic_id": "floats",
+  "model": null,
+  "rubric": null,
+  "scores": [
+    {
+      "dimension": "float_proximity",
+      "score": null,
+      "max": 1,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "float-proximity pre-flight is a deterministic advisory scan of the compiled PDF/.aux; owns no rubric dim."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "dimension": "reader_flow",
+      "evidence_span": "parity39.1: Figure 2 (page 8)",
+      "rationale": "Figure 2 renders on page 8; its first reference is on page 6: 2 pages from its first reference; renders in section 6 but is first referenced in section 5.",
+      "suggested_fix": "Move Figure 2 next to its first reference (adjust placement or float position), or move the first reference next to the float.",
+      "tool_calls": [],
+      "downstream_risk": null
+    }
+  ],
+  "critical_flags": [],
+  "total": null,
+  "threshold": null,
+  "verdict": null,
+  "rendered_artifact": null,
+  "probes": null,
+  "unscored": false
+}

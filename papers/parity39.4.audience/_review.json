@@ -1,0 +1,27 @@
+{
+  "schema_version": "1",
+  "kind": "tool_evidence",
+  "version_dir": "parity39.4",
+  "critic_id": "audience",
+  "model": null,
+  "rubric": null,
+  "scores": [
+    {
+      "dimension": "audience_check",
+      "score": null,
+      "max": 1,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "audience-fit pre-flight is a deterministic advisory scan; owns no rubric dim (evidence for dims 7/9)."
+    }
+  ],
+  "findings": [],
+  "critical_flags": [],
+  "total": null,
+  "threshold": null,
+  "verdict": null,
+  "rendered_artifact": null,
+  "probes": null,
+  "unscored": false
+}

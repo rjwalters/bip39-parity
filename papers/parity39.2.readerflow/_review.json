@@ -1,0 +1,363 @@
+{
+ "schema_version": "1",
+ "kind": "judgment",
+ "version_dir": "parity39.2",
+ "critic_id": "readerflow",
+ "model": "claude-fable-5-2",
+ "rubric": "anvil-pub-v2",
+ "scores": [
+  {
+   "dimension": "1",
+   "score": null,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "2",
+   "score": null,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "3",
+   "score": null,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "4",
+   "score": null,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "5",
+   "score": null,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "6",
+   "score": null,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "7",
+   "score": null,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "8",
+   "score": null,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  },
+  {
+   "dimension": "9",
+   "score": null,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "reader-flow lens owns no dimension; findings feed dim 7 via paper-review step 5."
+  }
+ ],
+ "findings": [
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "joint decoding recovered 99.5\\% of",
+   "rationale": "class 1 (Abstract, main.tex:L30): \"joint decoding\" is the paper's central coined term but is never defined; the abstract uses it cold, and the body never says it is the same thing as the \"Grid\" method or \"the grid decoder\".",
+   "suggested_fix": "Define it once at first use (\"decoding all cards together, which we call joint decoding\") and state at line 392 that the Grid method is joint decoding."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "$t$ of $n$ cards recover the secret, fewer reveal nothing, every card repairs",
+   "rationale": "class 1 (Abstract, main.tex:L28): \"card\" appears with no statement that a card is one share written as a phrase; the body (lines 204-207) also uses it without ever saying so.",
+   "suggested_fix": "Say \"each share is a phrase written on one card\" at first use, and repeat the definition at line 204."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "itself, and spare cards repair each other. In fault injection",
+   "rationale": "class 1 (Abstract, main.tex:L29): \"spare cards\" is used here and in the Introduction (line 76) but only becomes inferable at line 496 (\"the single spare card of a 2-of-3 set\"); it is never defined as cards beyond the threshold t.",
+   "suggested_fix": "Define it at first use: \"spare cards (those beyond the t needed)\"."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "In 31{,}600 trials the decoder returned no wrong secret.",
+   "rationale": "class 1 (Abstract, main.tex:L34): The count has no referent: the body (line 531) restricts it to grid trials and to the two methods with a digest, while single-phrase trials and digest-free methods did return wrong answers.",
+   "suggested_fix": "Write \"In 31,600 grid trials the decoders that check the digest returned no wrong secret\"."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "they compose into a product",
+   "rationale": "class 1 (1 Introduction, main.tex:L47): \"product code\" is used as the key structural idea but never defined; the stated audience is assumed to know Reed-Solomon basics, not product codes.",
+   "suggested_fix": "Add one clause: \"a product code, i.e. an array whose every row is a codeword of one code and every column a codeword of another\"."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "happens to be the locator of one of the $L$",
+   "rationale": "class 1 (3.2 Repair beyond substitutions, main.tex:L190): \"locator\" is never defined; the reader must infer that it means alpha^p for a position p.",
+   "suggested_fix": "Write \"equals $\\alpha^{p}$ for one of the $L$ positions $p$\"."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "A 24+2 phrase has 325 possible",
+   "rationale": "class 1 (3.2 Repair beyond substitutions, main.tex:L191): The \"N+k\" shorthand (24+2, 12+2, and so on) is used here and as the Table 1 column heads without ever being introduced.",
+   "suggested_fix": "Introduce it in Section 3.1: \"we write N+k for a phrase of N data words and k parity words\"."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "the row decoder as a known symbol",
+   "rationale": "class 1 (4.2 Reading the header, main.tex:L282): \"the row decoder\" is used before the Rows step of Section 4.4 and is never defined as the single-phrase repair of Section 3.",
+   "suggested_fix": "Write \"the single-card repair of Section 3 (the row decoder)\" at first use."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "Everything inside the capacity~\\eqref{eq:cap} is repaired, as it must be.",
+   "rationale": "class 1 (5.2 Single phrases, main.tex:L404): \"capacity\" is coined here for the condition 2e+s<=k, which Section 3.1 called \"the standard guarantee\"; \"beyond the capacity of $k=2$\" then follows without a definition.",
+   "suggested_fix": "Name inequality (2) \"the capacity\" where it is stated (line 147) and use that name throughout."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "numbers illegible, 3\\% wrong",
+   "rationale": "class 1 (5.3 Grids (Table 2), main.tex:L468): This fault row, discussed at line 523, is missing from the fault list in Setup (lines 371-380), so the reader does not know what was done to the cards.",
+   "suggested_fix": "Add an \"illegible number\" item to the fault list saying the card number is withheld from the decoder."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "\\emph{Grid}: the decoder of Section~\\ref{sec:decoder}, with the digest.",
+   "rationale": "class 2 (5.1 Setup, main.tex:L392): One method goes by \"joint decoding\", \"Grid\", \"the grid decoder\", \"decoded together\", \"decoded as one object\" and \"decoding across cards/shares\"; \"grid\" is also the name of the share format and of a dealt set.",
+   "suggested_fix": "Pick one name for the method and use it in the abstract, method list, table head, figure legend and prose."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "repairing cards one at a time recovers 31\\%, because three of the five cards",
+   "rationale": "class 2 (5.3 Grids, main.tex:L495): The baseline is variously \"repairing cards separately\", \"repairing cards one at a time\", \"per-card repair\", \"Card parity\", \"per-share correction\" and \"repair card by card\", and the prose does not say whether it means the Card parity or the Card parity + digest column.",
+   "suggested_fix": "Use the table's column label in the prose, or define \"per-card repair\" as that column once."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "\\emph{Checksum only}: a card counts only if it is exactly valid as",
+   "rationale": "class 2 (5.1 Setup, main.tex:L383): \"Checksum\" elsewhere means the BIP39 SHA-256 checksum (also called \"the BIP39 filter\" and \"the filter\"), but here it means the Reed-Solomon validity check used for detection only.",
+   "suggested_fix": "Rename the baseline (for example \"Detect only\") or state that the checksum here is the card's own parity."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "by word to parity phrases",
+   "rationale": "class 2 (1 Introduction, main.tex:L71): The single-phrase object is called \"parity phrases\" here, \"protected phrase\" at line 137, \"single phrases\" in Section 5 and \"unshared 24-word phrase\" at line 657.",
+   "suggested_fix": "Choose one term (for example \"protected phrase\") and use it everywhere."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "sense of~\\eqref{eq:syn} with length $L=W+1$.",
+   "rationale": "class 2 (4.1 Construction, main.tex:L210): $L$ is rebound from $N+k$ (Section 3) to $W+1$, and the data-word count changes from $N$ to $D$, so equation (1) must be re-read with new meanings.",
+   "suggested_fix": "Keep one symbol set, or flag the change: \"in this section the row length is $W+1$, with $D$ playing the role of $N$\"."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "(d) The stripped cards of any $m\\ge t$ holders, read as an $m\\times W$ array,",
+   "rationale": "class 2 (4.1 Construction, main.tex:L251): The people who hold cards are \"holders\", \"parties\", \"participants\", \"people\" and \"backup holders\", and here $m$ counts holders although it means cards (a holder may have several, as in Section 6).",
+   "suggested_fix": "Write \"any $m\\ge t$ cards\" and use \"holder\" consistently for the person."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "Scheme & Cards & 1\\% & 3\\% & 5\\% & Garbage & Foreign & Burnt \\\\",
+   "rationale": "class 2 (6 Custody Arrangements (Table 4), main.tex:L581): A t-of-n instance is a \"set\" (abstract), a \"dealing\" (line 204), a \"sharing\" (line 60), a \"Scheme\" (this table) and an \"arrangement\" (Section 6), while \"scheme\" also means Shamir's scheme and the paper's whole design (line 539).",
+   "suggested_fix": "Reserve \"dealing\" for one dealt set, \"t-of-n set\" for the parameters, and \"scheme\" for the design."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "margin: 83\\% at a 3\\% error rate, and nothing if one card is lost or burnt. One",
+   "rationale": "class 2 (6 Custody Arrangements, main.tex:L607): \"burnt\" here reads as a destroyed card, but \"burn\" is defined at line 374 as a run of unreadable words and \"Burnt\" is a Table 4 column with that meaning.",
+   "suggested_fix": "Write \"lost or destroyed\", or say explicitly that this refers to the Burnt column."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "\\emph{Wrong cards are caught by the digest, not by joint decoding.} When one",
+   "rationale": "class 2 (5.3 Grids, main.tex:L514): The defined term \"foreign card\" also appears as \"wrong cards\", \"a card that does not belong\", \"a card that is wrong as a whole\" and \"mix-up\", while \"wrong\" is also an outcome label and a word-level fault.",
+   "suggested_fix": "Use \"foreign card\" (and \"garbage card\") consistently and keep \"wrong\" for words and outcomes."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "\\caption{Correct recoveries with all cards at hand as the per-word error rate",
+   "rationale": "class 4 (5.3 Grids (Figure 2), main.tex:L485): Figure 2 prints on page 7 above the Section 5.2 heading, before Table 2 from which it is drawn (page 8) and a page ahead of its discussion.",
+   "suggested_fix": "Place the figure after Table 2, next to the \"Spare cards turn into error correction\" paragraph."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "\\caption{Percentage of correct recoveries by number of cards brought together",
+   "rationale": "class 4 (6 Custody Arrangements (Table 4), main.tex:L571): Table 4 prints at the top of page 9 together with Table 3, above the Section 5.4 heading, so a Section 6 table appears inside Section 5 before its section begins.",
+   "suggested_fix": "Constrain the float so it prints after the Section 6 heading."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "decoder does the same. Joint decoding without the digest does not: in",
+   "rationale": "class 5 (5.3 Grids, main.tex:L518): Results are reported for a fifth method (grid decoder with the digest switched off) that is not in the method list, in Table 2, or in the reproducibility commands; its 3-of-5 all-cards result is also not given.",
+   "suggested_fix": "Add this variant to the method list and Table 2, or drop the sentence."
+  },
+  {
+   "severity": "major",
+   "dimension": "7",
+   "evidence_span": "first reconstruction fails and more than $t$ cards were repaired, the decoder",
+   "rationale": "class 5 (4.3 The digest, main.tex:L305): The decoder's subset fallback and \"repaired\" cards are discussed before the decoder is introduced in Section 4.4, whose step 5 then points back with \"as described above\".",
+   "suggested_fix": "Move the subset fallback and its error bound into the Check step of Section 4.4, leaving only the digest definition in 4.3."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "valid, which is the property our cards have at the word level. All three",
+   "rationale": "class 5 (2 Related Work, main.tex:L105): Related Work compares against \"our cards\" and \"our first two parity checks\" (line 124) and forward-references Section 4.5 before either construction has been described.",
+   "suggested_fix": "Move Related Work after Section 4, or rephrase the comparisons so they do not rely on the constructions."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "The lower half of Table~\\ref{tab:grid} is the scheme's weak case. With exactly",
+   "rationale": "class 6 (5.4 With exactly t cards, only k helps, main.tex:L539): The caveat that exactly t cards give no joint-decoding benefit is stated in full in the abstract (line 33), Introduction (line 77), here, the general rule (lines 621-623), Choosing k (line 655) and the Conclusion (line 702).",
+   "suggested_fix": "State it once in Section 5.4 and once as the planning rule, and shorten the other occurrences to a pointer."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "(1) Word error rates of 1--10\\% are an assumption. The study we cite measures",
+   "rationale": "class 6 (7 Discussion, main.tex:L641): The caveat that error rates are assumed and the cited study measures recall is given four times (lines 51-53, 84, 641, 663).",
+   "suggested_fix": "Keep the Introduction and the Limits statements and delete the other two."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "of the same kind. Two parity words repair a swap or a dropped word and four",
+   "rationale": "class 6 (9 Conclusion, main.tex:L698): The Conclusion repeats line 405-407 and the abstract's closing claims (no wrong secret in 31,600 trials; reliability from parity alone without a spare card) almost verbatim.",
+   "suggested_fix": "Replace the restated numbers with the one design recommendation the reader should take away."
+  },
+  {
+   "severity": "nit",
+   "dimension": "7",
+   "evidence_span": "does not help an attacker who has $t$ cards, and does not weaken the secret:",
+   "rationale": "class 6 (7 Discussion, main.tex:L637): This restates \"Parity reveals nothing about the secret\" from five lines earlier in the same paragraph (line 631).",
+   "suggested_fix": "Merge the two sentences into one."
+  },
+  {
+   "severity": "nit",
+   "dimension": "7",
+   "evidence_span": "arrangement on the BIP39 alphabet, the unprinted header, and a decoder that",
+   "rationale": "class 6 (1 Introduction, main.tex:L82): \"refuses instead of guessing\" repeats \"reports ambiguity instead of guessing\" from the contribution list fourteen lines earlier (line 68).",
+   "suggested_fix": "Drop one of the two."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "informative rows are the edits. Two parity words repair a swap or a dropped",
+   "rationale": "class 7 (5.2 Single phrases, main.tex:L405): The unqualified claim does not match Table 1, where 24+2 without the filter gives 84.5-87% for swaps and k=3 gives 76-96% for two edits; it holds only with the BIP39 checksum filter, and it recurs unqualified at lines 657 and 698.",
+   "suggested_fix": "Add \"with the BIP39 checksum filter (otherwise the result is sometimes ambiguous)\" at each occurrence."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "repair falls to 86\\% (2-of-3) and 93\\% (3-of-5), since a swap leaves room for",
+   "rationale": "class 7 (5.3 Grids, main.tex:L508): Table 2 values are rounded to integers here (86, 93; also 31, 41, 61, 90, 98, 88, 85 elsewhere) while the same sentence continues with unrounded 92.5 and the next gives 94.7 and 98.2.",
+   "suggested_fix": "Quote all table values at one precision, or say once that prose rounds to the nearest percent."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "set the gain at that rate is smaller, 61\\% against 41\\%, and below 5\\% the two",
+   "rationale": "class 7 (5.3 Grids, main.tex:L497): The text says the methods agree \"below 5%\" while the Figure 2 caption (line 487) says \"up to 5%\", leaving the 5% point (96.7 against 93.5) unclear.",
+   "suggested_fix": "Use \"up to and including 5%\" in both places."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "of the five grid files. The command-line tool exposes the scheme directly: the",
+   "rationale": "class 7 (8 Reproducibility, main.tex:L689): The list above names six grid output files (one main, two for k=6 and k=8, three scenario files), not five, so the reader cannot reconstruct the 31,600 total without guessing.",
+   "suggested_fix": "Correct the file count and give the sum explicitly (13,600 + 6,000 + 12,000)."
+  },
+  {
+   "severity": "nit",
+   "dimension": "7",
+   "evidence_span": "margin: 83\\% at a 3\\% error rate, and nothing if one card is lost or burnt. One",
+   "rationale": "class 7 (6 Custody Arrangements, main.tex:L607): Table 4 values appear as 83% and 98% (line 601) but 98.8% one line later, and the same configuration is 84.5/85% in Table 2 and Section 5.4 with no pointer to the re-run note at line 396.",
+   "suggested_fix": "Use one precision and add \"(Table 4; a separate run from Table 2)\"."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "three days and 49\\% could not after seven, and of the 41 failed attempts, the",
+   "rationale": "class 9 (1 Introduction, main.tex:L55): One sentence carries five numbers (40%, 49%, 41, 14, 12-word) without the participant count, and the point (failures are near misses) only arrives in the next sentence.",
+   "suggested_fix": "Lead with \"most recoverable failures were a single wrong word\" and move the study figures to a following sentence with the sample size."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "the header is never printed. All codewords in this section are valid in the",
+   "rationale": "class 9 (4.1 Construction, main.tex:L209): The header is introduced with no reason for its existence; the motivation (binds the card number and threshold into the code at no written cost) only appears in Section 4.2, lines 285-287.",
+   "suggested_fix": "Add one sentence at the definition saying what the header is for."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "A tempting shortcut is to encode once with large $k$ and hand each party a",
+   "rationale": "class 9 (4.5 Why not split one long phrase?, main.tex:L342): This motivation for using Shamir sharing sits after the full construction and decoder, so the reader carries the obvious \"why not just split the Section 3 phrase\" question through all of Section 4.",
+   "suggested_fix": "Move it to the start of Section 4, before the Construction."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "\\section{Reproducibility}",
+   "rationale": "class 9 (8 Reproducibility, main.tex:L666): A meta section of commands and file names sits between the Discussion and the Conclusion, interrupting the close of the argument.",
+   "suggested_fix": "Move it after the Conclusion or into an appendix."
+  }
+ ],
+ "critical_flags": [],
+ "total": null,
+ "threshold": null,
+ "verdict": null
+}

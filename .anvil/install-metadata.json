@@ -1,0 +1,10 @@
+{
+  "anvil_version": "0.11.49",
+  "commit": "727f5034",
+  "layout_version": 2,
+  "installed_skills": ["spec", "paper", "help"],
+  "skipped_overrides": [],
+  "skill_hashes": {"spec": "d61e1f1ac5c48d19d7f2547e016cb64b01434919fbfd07a3bb28c571c527825b", "paper": "2708498d5c1848d52090a6ea826a2e73c571de3678b8f07862ce78bc01e76efe", "help": "57086a6861f55f4c48c7df7cb29209ed787408bc0f56679ca44fbd4891defd35"},
+  "skill_versions": {"spec": "0.11.49", "paper": "0.11.49", "help": "0.11.49"},
+  "lib_hash": "eafa2ac9d479a819b3eaf2da89c3212246373d1fb58df184b6bd418a0ca10242"
+}

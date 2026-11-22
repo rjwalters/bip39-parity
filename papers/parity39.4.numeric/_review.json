@@ -1,0 +1,109 @@
+{
+  "schema_version": "1",
+  "kind": "tool_evidence",
+  "version_dir": "parity39.4",
+  "critic_id": "numeric",
+  "model": null,
+  "rubric": null,
+  "scores": [
+    {
+      "dimension": "numeric_consistency",
+      "score": null,
+      "max": 1,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "numeric-consistency is a deterministic claim-vs-claim arithmetic check; owns no rubric dim."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L439",
+      "rationale": "claim '1.5\\\\% of' asserts 1.5% but the window fraction '0 / 1' computes 0 / 1 = 0.0%, not 1.5%.",
+      "suggested_fix": "Reconcile the claim '1.5\\\\% of' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L491",
+      "rationale": "claim '3\\\\% of' asserts 3% but the window fraction '33 / 40' computes 33 / 40 = 82.5%, not 3%.",
+      "suggested_fix": "Reconcile the claim '3\\\\% of' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L492",
+      "rationale": "claim '5\\\\% of' asserts 5% but the window fraction '33 / 40' computes 33 / 40 = 82.5%, not 5%.",
+      "suggested_fix": "Reconcile the claim '5\\\\% of' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L493",
+      "rationale": "claim '10\\\\% of' asserts 10% but the window fraction '0 / 100' computes 0 / 100 = 0.0%, not 10%.",
+      "suggested_fix": "Reconcile the claim '10\\\\% of' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L505",
+      "rationale": "claim '3\\\\% of' asserts 3% but the window fraction '0 / 100' computes 0 / 100 = 0.0%, not 3%.",
+      "suggested_fix": "Reconcile the claim '3\\\\% of' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L506",
+      "rationale": "claim '5\\\\% of' asserts 5% but the window fraction '0 / 100' computes 0 / 100 = 0.0%, not 5%.",
+      "suggested_fix": "Reconcile the claim '5\\\\% of' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L577",
+      "rationale": "'88' % (line 577) quotes the same quantity as '86' % (line 539, a different section) at a different rounding or range; shared context: of-, wrong.",
+      "suggested_fix": "Reconcile the claim '88' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L578",
+      "rationale": "'85' % (line 578) quotes the same quantity as '86' % (line 539, a different section) at a different rounding or range; shared context: of-, wrong.",
+      "suggested_fix": "Reconcile the claim '85' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "numeric_consistency",
+      "evidence_span": "main.tex:L644",
+      "rationale": "'98.8' % (line 644) quotes the same quantity as '99' % (line 579, a different section) at a different rounding or range; shared context: card, restores.",
+      "suggested_fix": "Reconcile the claim '98.8' with the values named in its surrounding paragraphs \u2014 either correct the claimed number or the population it derives from, or suppress with <!-- anvil-lint-disable: numeric_consistency --> and document why the arithmetic is intentional.",
+      "tool_calls": [],
+      "downstream_risk": null
+    }
+  ],
+  "critical_flags": [],
+  "total": null,
+  "threshold": null,
+  "verdict": null,
+  "rendered_artifact": null,
+  "probes": null,
+  "unscored": false
+}

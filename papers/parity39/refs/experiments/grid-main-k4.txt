@@ -1,0 +1,41 @@
+# lake exe gridtests 400
+
+2-of-3, 24 seed + 2 digest + 4 parity words per card, 400 trials per row; % correct / % wrong (rest refused)
+                                      checksum only |  card parity  | parity+digest | grid, no dig. | grid + digest
+  all cards, 1% word errors             80.7 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, 3% word errors             33.0 /   0.0 |   99.2 /   0.0 |   99.2 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0
+  all cards, 5% word errors             12.7 /   0.0 |   93.5 /   0.0 |   93.5 /   0.0 |   96.7 /   0.0 |   96.7 /   0.0
+  all cards, 10% word errors             1.0 /   0.0 |   40.7 /   0.0 |   40.7 /   0.0 |   61.2 /   0.0 |   61.2 /   0.0
+  only t cards, 1% word errors          57.2 /   0.0 |   99.5 /   0.0 |   99.5 /   0.0 |   99.5 /   0.0 |   99.5 /   0.0
+  only t cards, 3% word errors          16.7 /   0.0 |   87.7 /   0.0 |   87.7 /   0.0 |   87.7 /   0.0 |   87.7 /   0.0
+  only t cards, 5% word errors           3.2 /   0.0 |   62.0 /   0.0 |   62.0 /   0.0 |   62.0 /   0.0 |   62.0 /   0.0
+  all cards, one is garbage, 1%         52.7 /   0.0 |   99.2 /   0.0 |   99.2 /   0.0 |   99.2 /   0.0 |   99.2 /   0.0
+  all cards, 5 words burnt on each       0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   89.7 /   0.0 |   89.7 /   0.0
+  all cards, 8 words burnt on each       0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   34.7 /   0.0 |   34.7 /   0.0
+  all cards, dropped words, 3%          10.2 /   0.0 |   94.5 /   0.0 |   94.5 /   0.0 |   94.7 /   0.0 |   94.7 /   0.0
+  all cards, one from another set       33.0 /  67.0 |   33.0 /  67.0 |  100.0 /   0.0 |    0.0 /   0.0 |  100.0 /   0.0
+  only t cards, one from another set     0.0 / 100.0 |    0.0 / 100.0 |    0.0 /   0.0 |    0.0 / 100.0 |    0.0 /   0.0
+  all cards, numbers illegible, 3%      36.0 /   0.0 |   98.0 /   0.0 |   98.0 /   0.0 |   98.0 /   0.0 |   98.0 /   0.0
+  all cards, one swap on each            0.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, one swap on each, 3%        0.0 /   0.0 |   86.2 /   0.0 |   86.2 /   0.0 |   92.5 /   0.0 |   92.5 /   0.0
+  only t cards, one swap on each         0.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+
+3-of-5, 24 seed + 2 digest + 4 parity words per card, 400 trials per row; % correct / % wrong (rest refused)
+                                      checksum only |  card parity  | parity+digest | grid, no dig. | grid + digest
+  all cards, 1% word errors             89.2 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, 3% word errors             33.2 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, 5% word errors              7.0 /   0.0 |   95.5 /   0.0 |   95.5 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, 10% word errors             0.0 /   0.0 |   30.5 /   0.0 |   30.5 /   0.0 |   99.5 /   0.0 |   99.5 /   0.0
+  only t cards, 1% word errors          38.0 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0
+  only t cards, 3% word errors           5.5 /   0.0 |   84.5 /   0.0 |   84.5 /   0.0 |   84.5 /   0.0 |   84.5 /   0.0
+  only t cards, 5% word errors           0.5 /   0.0 |   50.7 /   0.2 |   50.7 /   0.0 |   50.7 /   0.2 |   50.7 /   0.0
+  all cards, one is garbage, 1%         73.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, 5 words burnt on each       0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   98.2 /   0.0 |   98.2 /   0.0
+  all cards, 8 words burnt on each       0.0 /   0.0 |    0.0 /   0.0 |    0.0 /   0.0 |   59.5 /   0.0 |   59.5 /   0.0
+  all cards, dropped words, 3%           7.0 /   0.0 |   98.2 /   0.0 |   98.2 /   0.0 |   98.2 /   0.0 |   98.2 /   0.0
+  all cards, one from another set       40.2 /  59.7 |   40.2 /  59.7 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  only t cards, one from another set     0.0 / 100.0 |    0.0 / 100.0 |    0.0 /   0.0 |    0.0 / 100.0 |    0.0 /   0.0
+  all cards, numbers illegible, 3%      34.0 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0 |   99.7 /   0.0
+  all cards, one swap on each            0.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  all cards, one swap on each, 3%        0.0 /   0.0 |   92.7 /   0.0 |   92.7 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0
+  only t cards, one swap on each         0.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0 |  100.0 /   0.0

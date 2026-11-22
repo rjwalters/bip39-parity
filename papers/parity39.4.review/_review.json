@@ -1,0 +1,195 @@
+{
+ "schema_version": "1",
+ "kind": "judgment",
+ "version_dir": "parity39.4",
+ "critic_id": "paper-review",
+ "model": "claude-fable-5-2",
+ "rubric": "anvil-pub-v2",
+ "scores": [
+  {
+   "dimension": "1",
+   "score": 5,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Rigor of method / argument: The round-three reason tied to the wrong-number sentence is closed: §4.2 now states the capacity cost and the beyond-capacity behaviour (\"A mislabelled card that does not repair alone is kept as unconfirmed evidence under the number entered\" — §4.2), and both match `Repair.repair` and `Grid.readCard`. The other edits to the argument were each checked against the code and are right: step 5 tests subsets whenever the first check fails (`combineRows`), the rescue step requires agreement with another unconfirmed card (`rescue`), S_0 is the plain sum (`RS.syndromes`, j = 0), and the S_0 parenthesis and the swap-estimate conclusion are now correct as worded. The point withheld in round three for the second reason stays withheld: the grid decoder is a heuristic with no stated class of patterns it corrects (\"is not shown to correct every pattern within this bound\" — §4.1), and nothing about it is proved."
+  },
+  {
+   "dimension": "2",
+   "score": 5,
+   "max": 6,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Evidence sufficiency: The tables and figure are unchanged and were re-read against the logs where the edited sentences depend on them: every figure in the edited sentences of §5.2, §5.3 and §9 matches `single-phrase.txt` and `grid-main-k4.txt`, 31,600 is exact, and neither digest method returned a wrong secret in any of the 102 logged rows. No experiment was added, so the scope point is unchanged; the paper now says so for the mislabelled card (\"Our experiments never enter a wrong number\" — §4.2) as it already did in general (\"It says nothing about fault patterns we did not inject\" — §5.3). One seed, independent uniform substitutions, no mislabelled-card or foreign-card-with-illegible-numbers trial (U2)."
+  },
+  {
+   "dimension": "3",
+   "score": 5,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Clarity of contribution: Unchanged and still met: the organising idea is the first sentence (\"Shares of a secret can repair themselves and each other, at the level where people make mistakes: whole words\" — §1), three itemised contributions with section pointers, inherited ingredients labelled. The abstract's last sentence now names which method the no-wrong-secret result belongs to. No underclaiming or buried lede against the brief's claim."
+  },
+  {
+   "dimension": "4",
+   "score": 4,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Related-work positioning: Unchanged apart from the disk-array sentence, which now claims only what the two cited sources can carry. Deployed formats are described on their mechanisms and the increment is stated (\"all of these formats decode each share on its own\" — §2). The point withheld in round three stands: repair of a near-miss mnemonic by bounded search against the BIP39 checksum or a known address, which recovery tools do and the cited study itself uses, is not positioned against parity words (U3; reviewer recall, not checked online). No litsearch sibling; no deduction for that."
+  },
+  {
+   "dimension": "5",
+   "score": 3,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Reproducibility: Unchanged because the gap is unchanged (\"The tree is not yet published at a public address\" — §8). Commands, seed, toolchain, verbatim logs and SHA-256 digests are given; all 15 digests in `refs/experiments/README.txt` were re-hashed against the working tree this pass and match. A reader of the PDF still cannot obtain the code, the logs or the README, and the README records a base commit \"plus uncommitted changes\" (U1; needs the author)."
+  },
+  {
+   "dimension": "6",
+   "score": 4,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Figure & table quality: Tables and figures are byte-identical to version 3 (`diff` of `figures/` and of the table bodies), so the round-three judgment carries: captions read alone (\"All other trials were refused, so 0 with no bracket means every trial was refused\" — Table 2). The same small residue is listed under U6: Table 1 column heads use N+k without a gloss, Fig. 2 plots three of five methods without saying the other two coincide, Fig. 1 side labels touch the dashed boxes."
+  },
+  {
+   "dimension": "7",
+   "score": 3,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Prose & structural quality: The round-three referent defects are fixed (abstract, study size, the 31,600 total), §5.2 no longer makes the reader recompute which k goes with which fault, and the build is clean (13 pages, no overfull box, no unresolved reference, no audience-fit hit, no AI-tell adjective). The class-1 cap does not apply (see `comments.md`). The point is withheld for what the revision left alone: naming drift for the two main methods (\"per-card methods without a digest return a wrong secret\" — §5.3, beside \"Card parity\", \"per-card repair\", \"repairing cards separately\" and \"one at a time\"), \"Checksum only\" against BIP39's checksum, \"row\" for both unwritten rows and cards (U5), and Fig. 2 printing two pages after its discussion (U6). The revision also adds one coined label with no definition (\"two-edit rows in 76--96\" — §5.2) and one loose referent (\"the one wrong answer in these runs\" — §5.3) (U7)."
+  },
+  {
+   "dimension": "8",
+   "score": 4,
+   "max": 5,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Citation hygiene: `refs.bib` is byte-identical to version 3: 22 entries, all cited, all keys resolve, journal and proceedings entries complete with DOIs. The disk-array sentence is now within what its two sources support (\"our first parity check is the plain sum that a single-parity array stores\" — §2). The point withheld in round three stands: the specification and repository entries point at moving `master` URLs with no revision or access date, and the SOUPS entry has no page range (U8)."
+  },
+  {
+   "dimension": "9",
+   "score": 3,
+   "max": 4,
+   "critical": false,
+   "evidence_span": null,
+   "fix": null,
+   "justification": "Rhetorical economy: Not addressed by this revision, which adds about ten lines and removes none: 13 pages against the brief's 10, the no-wrong-secret result still stated five times (abstract, §5.3, the captions of Tables 3 and 4, and \"returned no wrong secret in 31{,}600 trials\" — §9), the exactly-t caveat seven times and the assumed-rate caveat four times (U4)."
+  }
+ ],
+ "findings": [
+  {
+   "severity": "major",
+   "dimension": "5",
+   "evidence_span": "main.tex:L705-L709",
+   "rationale": "U1 (T1 open): the source tree is unpublished; the SHA-256 list in refs/experiments/README.txt matches the working tree but pins a tree no reader can fetch, and the README records uncommitted changes.",
+   "suggested_fix": "Publish the repository and cite URL and commit, or archive sources, wordlist, logs and README with the paper and cite the archive. Needs the author."
+  },
+  {
+   "severity": "major",
+   "dimension": "2",
+   "evidence_span": "main.tex:L296-L302",
+   "rationale": "U2: the mislabelled-card behaviour is now described accurately and disclosed as untested; no trial enters a wrong number (GridTests.lean supplies the true number or none), nor a foreign card with illegible numbers; one seed, independent uniform substitutions.",
+   "suggested_fix": "Add a mislabelled-card scenario to gridtests and report it as a row of Table 2; keep the other scope points as stated limits."
+  },
+  {
+   "severity": "minor",
+   "dimension": "1",
+   "evidence_span": "main.tex:L300-L301",
+   "rationale": "U2 residue: a mislabelled card is kept only with the right count of words, is dropped if its corrected number duplicates a card already read, and when kept enters the column stage at the entered number's evaluation point (Grid.readCard, readCards).",
+   "suggested_fix": "Add one clause for each in Section 4.2 or step 1 of Section 4.4."
+  },
+  {
+   "severity": "minor",
+   "dimension": "4",
+   "evidence_span": "main.tex:L54-L63",
+   "rationale": "U3 (related-work lead, not changed): repair of a near-miss mnemonic by bounded search against the BIP39 checksum or a known address is not positioned against parity words. Reviewer recall; not checked online.",
+   "suggested_fix": "Add two sentences on what parity words give that search does not; re-run paper-litsearch for this cluster."
+  },
+  {
+   "severity": "minor",
+   "dimension": "9",
+   "evidence_span": "main.tex:L739",
+   "rationale": "U4 (not changed): 13 pages against the brief's 10; no-wrong-secret result at L35, L566-567, L585, L608, L739; exactly-t caveat seven times; assumed-rate caveat four times.",
+   "suggested_fix": "State each once in full and point to it elsewhere; drop the sentence from the captions of Tables 3 and 4."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L409",
+   "rationale": "U5 (not changed): naming drift. Per-card repair has six labels (L32, L409, L518, L526, L546, L737); 'Checksum only' (L406) collides with the BIP39 checksum; 'row' names unwritten rows, cards (L331, L576) and table rows; 'holders' as the unit of m (L261); 'burnt' for a destroyed card (L643); 'hash check' (L84) for the digest.",
+   "suggested_fix": "Choose one name per method and bind table labels to it once; rename 'Checksum only' to 'Detection only'; 'no spare cards' at L576."
+  },
+  {
+   "severity": "minor",
+   "dimension": "6",
+   "evidence_span": "main.tex:L513-L521",
+   "rationale": "U6 (not changed): Fig. 2 prints on page 9, two pages after its discussion; Table 1 prints inside Section 5.3; Table 1 column heads (N+k) are not glossed; the k = 2 two-dropped-words cells are not explained in the text; Fig. 2 shows three of five methods without saying the other two coincide; Fig. 1 side labels touch the header boxes.",
+   "suggested_fix": "Move the Fig. 2 float after the 'Spare cards' paragraph; gloss the column heads and the ambiguous cells in the Table 1 caption; add one clause to the Fig. 2 caption; shift the two side labels in figures/grid.tex."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L300-L301",
+   "rationale": "U7 (new): 'unconfirmed evidence' is used in Section 4.2 before step 1 of Section 4.4 (L333-335) defines confirmed and unconfirmed cards.",
+   "suggested_fix": "Add a pointer to Section 4.4 step 1, or move the sentence into step 1."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L56",
+   "rationale": "U7 (new): '41 participants who failed (of 92)' is 45%, matching neither the 40% nor the 49% in the previous sentence; the 41 pools the three-day and seven-day groups and the text does not say so.",
+   "suggested_fix": "Write 'Of the 41 participants who failed at either interval (of 92 in all)'."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L436-L437",
+   "rationale": "U7 (new): 'the two-edit rows' is an undefined label; Section 3.2 L187 distinguishes edits from substitutions, and two wrong words at k = 3 (refused) could be read as a two-edit row.",
+   "suggested_fix": "Name the rows: two dropped words, or a wrong word plus a dropped word."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L561-L562",
+   "rationale": "U7 (new): 'the one wrong answer in these runs' follows a paragraph reporting wrong answers in the foreign-card rows of the same runs.",
+   "suggested_fix": "Write 'the one wrong answer outside the foreign-card rows'."
+  },
+  {
+   "severity": "minor",
+   "dimension": "7",
+   "evidence_span": "main.tex:L301-L302",
+   "rationale": "U7 (new): 'Our experiments never enter a wrong number' repeats L404 in the construction section, before the experiments are introduced; the abstract's 'digest' (L35) is 'a hash check' in the introduction (L84).",
+   "suggested_fix": "Keep the statement in Section 5.1 or the limits list; use one word for the digest."
+  },
+  {
+   "severity": "minor",
+   "dimension": "8",
+   "evidence_span": "refs.bib",
+   "rationale": "U8 (not changed): bip39, slip39, bip93, polyseed, sskr and shamir39 cite moving URLs with no revision or access date; ambati2026notall has no page range.",
+   "suggested_fix": "Add an access date or a commit to each web entry and the page range to the SOUPS entry."
+  },
+  {
+   "severity": "nit",
+   "dimension": "1",
+   "evidence_span": "main.tex:L686-L687",
+   "rationale": "U9 (carried): no example for 'a better decoder exists for some patterns'; the pooled bound at L567-570 mixes scenarios of different risk.",
+   "suggested_fix": "Give one pattern; lead with the per-cell bound."
+  }
+ ],
+ "critical_flags": [],
+ "total": 36,
+ "threshold": 35,
+ "verdict": "ADVANCE"
+}

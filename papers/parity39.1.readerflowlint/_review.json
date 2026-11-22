@@ -1,0 +1,55 @@
+{
+  "schema_version": "1",
+  "kind": "tool_evidence",
+  "version_dir": "parity39.1",
+  "critic_id": "reader_flow_lint",
+  "model": null,
+  "rubric": null,
+  "scores": [
+    {
+      "dimension": "reader_flow_lint",
+      "score": null,
+      "max": 1,
+      "critical": false,
+      "evidence_span": null,
+      "fix": null,
+      "justification": "reader-flow lint is a deterministic advisory scan; owns no rubric dim (evidence for the reader-flow lens and dim 7)."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "minor",
+      "dimension": "reader_flow",
+      "evidence_span": "main.tex:L331",
+      "rationale": "\"per-share\" (main.tex:L331) and \"per share\" (main.tex:L101) likely name one concept; pick one spelling.",
+      "suggested_fix": "Use a single name for the concept throughout.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "reader_flow",
+      "evidence_span": "main.tex:L433",
+      "rationale": "\"per-word\" (main.tex:L433) and \"per word\" (main.tex:L325) likely name one concept; pick one spelling.",
+      "suggested_fix": "Use a single name for the concept throughout.",
+      "tool_calls": [],
+      "downstream_risk": null
+    },
+    {
+      "severity": "minor",
+      "dimension": "reader_flow",
+      "evidence_span": "main.tex:L451",
+      "rationale": "\"per-card\" (main.tex:L34) and \"per card\" (main.tex:L451) likely name one concept; pick one spelling.",
+      "suggested_fix": "Use a single name for the concept throughout.",
+      "tool_calls": [],
+      "downstream_risk": null
+    }
+  ],
+  "critical_flags": [],
+  "total": null,
+  "threshold": null,
+  "verdict": null,
+  "rendered_artifact": null,
+  "probes": null,
+  "unscored": false
+}

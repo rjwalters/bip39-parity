@@ -1,0 +1,26 @@
+{
+  "critic": "readerflow",
+  "role": "paper-review.md step 4j (fresh-context reader-flow lens)",
+  "started": "2026-11-22T19:04:30Z",
+  "finished": "2026-11-22T19:08:00Z",
+  "model": "claude-fable-5-2",
+  "schema_version": 1,
+  "scorecard_kind": "machine-summary",
+  "audience": "wallet and key-management engineers, and applied cryptographers who know BIP39, Shamir sharing and the basics of Reed-Solomon codes",
+  "inputs": [
+    "main.tex + figures/grid.tex + figures/rates.tex (source-led)",
+    "main.pdf (placement only)"
+  ],
+  "finding_counts": {
+    "minor": 33,
+    "major": 9,
+    "nit": 5
+  },
+  "recurrence": {
+    "prior_version": 3,
+    "prior_total": 31,
+    "recurring": 18,
+    "share": 0.581
+  },
+  "timestamps_note": "approximate; lens ran about 206 s between these times"
+}

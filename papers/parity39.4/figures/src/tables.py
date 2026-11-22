@@ -1,0 +1,145 @@
+"""Build the table rows and Figure 2 from the verbatim harness outputs.
+
+Usage: python3 figures/src/tables.py <experiments dir> <main.tex> <figures/rates.tex>
+Replaces the @@...@@ markers in main.tex (first run only) and rewrites rates.tex.
+Column order in the harness output:
+  0 checksum only | 1 card parity | 2 parity+digest | 3 grid, no digest | 4 grid + digest
+"""
+import re
+import sys
+from pathlib import Path
+
+exp, main, rates = map(Path, sys.argv[1:4])
+
+
+def parse(name):
+    """-> list of (header, {row name: [(ok, wrong) x 5]}) per block, and trials per block."""
+    blocks = []
+    for line in (exp / name).read_text().splitlines():
+        if re.match(r"\d+-of-\d+", line):
+            trials = int(re.search(r"(\d+) trials", line).group(1))
+            blocks.append((line, trials, {}))
+        elif "|" in line and "/" in line:
+            label = line[:38].strip()
+            cells = [tuple(float(x) for x in c.split("/")) for c in line[38:].split("|")]
+            blocks[-1][2][label] = cells
+    return blocks
+
+
+def num(x):
+    return f"{x:.1f}".rstrip("0").rstrip(".") if x != int(x) else str(int(x))
+
+
+def cell(a, b, col):
+    (ok1, w1), (ok2, w2) = a[col], b[col]
+    s = f"{num(ok1)} / {num(ok2)}"
+    if w1 or w2:
+        s += f" {{\\scriptsize[{num(w1)} / {num(w2)}]}}"
+    return s
+
+
+main_blocks = parse("grid-main-k4.txt")
+(_, _, a), (_, _, b) = main_blocks
+cols = [0, 1, 2, 3, 4]
+
+
+def rows(spec):
+    out = []
+    for label, text in spec:
+        out.append(text + " & " + " & ".join(cell(a[label], b[label], c) for c in cols) + r" \\")
+    return "\n".join(out)
+
+
+rows_all = rows([
+    ("all cards, 1% word errors", r"1\% of words wrong"),
+    ("all cards, 3% word errors", r"3\% of words wrong"),
+    ("all cards, 5% word errors", r"5\% of words wrong"),
+    ("all cards, 10% word errors", r"10\% of words wrong"),
+    ("all cards, 5 words burnt on each", "5 words burnt per card"),
+    ("all cards, 8 words burnt on each", "8 words burnt per card"),
+    ("all cards, one swap on each", "one swap per card"),
+    ("all cards, one swap on each, 3%", r"one swap per card, 3\% wrong"),
+    ("all cards, dropped words, 3%", r"dropped words, 3\% wrong"),
+    ("all cards, numbers illegible, 3%", r"numbers illegible, 3\% wrong"),
+    ("all cards, one is garbage, 1%", r"one garbage card, 1\% wrong"),
+    ("all cards, one from another set", "one card is foreign"),
+])
+rows_t = rows([
+    ("only t cards, 1% word errors", r"1\% of words wrong"),
+    ("only t cards, 3% word errors", r"3\% of words wrong"),
+    ("only t cards, 5% word errors", r"5\% of words wrong"),
+    ("only t cards, one swap on each", "one swap per card"),
+    ("only t cards, one from another set", "one card is foreign"),
+])
+
+k6 = parse("grid-minimal-k6.txt")
+k8 = parse("grid-minimal-k8.txt")
+rows_k = "\n".join(
+    rf"{pct}\% & " + " & ".join(
+        f"{num(bl[0][2][lab][4][0])} / {num(bl[1][2][lab][4][0])}" for bl in (main_blocks, k6, k8)
+    ) + r" \\"
+    for pct, lab in ((3, "only t cards, 3% word errors"), (5, "only t cards, 5% word errors"))
+)
+
+scen = []
+total = 0
+wrong_digest = 0
+for f in ("grid-main-k4.txt", "grid-minimal-k6.txt", "grid-minimal-k8.txt",
+          "scenario-3of6.txt", "scenario-3of5.txt", "scenario-4of9.txt"):
+    for _, trials, d in parse(f):
+        total += trials * len(d)
+        wrong_digest += sum(1 for v in d.values() if v[2][1] or v[4][1])
+for f, scheme in (("scenario-3of6.txt", "3-of-6"), ("scenario-3of5.txt", "3-of-5"),
+                  ("scenario-4of9.txt", "4-of-9")):
+    (_, _, d), = parse(f)
+    hands = sorted({int(k.split()[0]) for k in d})
+    for j, m in enumerate(hands):
+        g = lambda suffix: num(d[f"{m} cards, {suffix}"][4][0])
+        scen.append(
+            (scheme if j == 0 else "") + f" & {m} & " + " & ".join(g(s) for s in (
+                "1% word errors", "3% word errors", "5% word errors", "one is garbage, 1%",
+                "one from another set", "5 burnt words on each")) + r" \\")
+    scen.append(r"\midrule")
+rows_scen = "\n".join(scen[:-1])
+
+print("total trials", total, "rows with a wrong answer from a digest method:", wrong_digest)
+for lab in ("all cards, one swap on each", "all cards, one swap on each, 3%",
+            "only t cards, one swap on each", "all cards, dropped words, 3%",
+            "all cards, numbers illegible, 3%", "all cards, one from another set",
+            "only t cards, one from another set"):
+    print(lab, a[lab], b[lab])
+
+text = main.read_text()
+for key, val in (("ROWS_ALL", rows_all), ("ROWS_T", rows_t), ("ROWS_K", rows_k),
+                 ("ROWS_SCEN", rows_scen), ("TOTAL", f"{total:,}".replace(",", "{,}")),
+                 ("BOUND", "$" + f"{3 / total * 1e4:.1f}" + r"\times10^{-4}$")):
+    text = text.replace(f"@@{key}@@", val)
+main.write_text(text)
+
+pts = lambda blk, col: " ".join(
+    f"({p},{blk[f'all cards, {p}% word errors'][col][0]})" for p in (1, 3, 5, 10))
+rates.write_text(rf"""% Correct recoveries vs per-word error rate.
+% Generated by figures/src/tables.py from refs/experiments/grid-main-k4.txt
+\begin{{tikzpicture}}
+\begin{{groupplot}}[
+  group style={{group size=2 by 1, horizontal sep=1.2cm, ylabels at=edge left}},
+  width=0.47\linewidth, height=5.2cm,
+  xlabel={{Words wrong (\%)}}, ylabel={{Correct recoveries (\%)}},
+  xtick={{1,3,5,10}}, ymin=0, ymax=105, ytick={{0,25,50,75,100}},
+  grid=major, grid style={{gray!25}},
+  legend style={{font=\footnotesize, draw=none, fill=none, legend columns=3, column sep=6pt, at={{(-0.12,-0.34)}}, anchor=north}},
+  every axis plot/.append style={{thick, mark size=2pt}}]
+\nextgroupplot[title={{2-of-3, all 3 cards}}]
+\addplot[color=black!55, mark=triangle*, dashed] coordinates {{{pts(a, 0)}}};
+\addplot[color=orange!85!black, mark=square*] coordinates {{{pts(a, 1)}}};
+\addplot[color=blue!70!black, mark=*] coordinates {{{pts(a, 4)}}};
+\nextgroupplot[title={{3-of-5, all 5 cards}}]
+\addplot[color=black!55, mark=triangle*, dashed] coordinates {{{pts(b, 0)}}};
+\addlegendentry{{Checksum only}}
+\addplot[color=orange!85!black, mark=square*] coordinates {{{pts(b, 1)}}};
+\addlegendentry{{Card parity}}
+\addplot[color=blue!70!black, mark=*] coordinates {{{pts(b, 4)}}};
+\addlegendentry{{Grid}}
+\end{{groupplot}}
+\end{{tikzpicture}}
+""")
