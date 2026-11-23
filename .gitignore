@@ -13,3 +13,9 @@ papers/**/*.fdb_latexmk
 papers/**/*.synctex.gz
 # Text of a third-party paper used for local citation auditing; not redistributed
 papers/parity39/refs/ambati2026-soups-extract.txt
+
+# Repo Skills machine-local install metadata (absolute source path + timestamp)
+.claude/skills/repo/.install-local.json
+
+# Repo Skills Codex-side machine-local install metadata (never committed)
+.agents/skills/repo/.install-local.json
