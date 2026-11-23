@@ -16,3 +16,7 @@ root = "Tests"
 [[lean_exe]]
 name = "gridtests"
 root = "GridTests"
+
+[[lean_exe]]
+name = "kdftests"
+root = "KdfTests"

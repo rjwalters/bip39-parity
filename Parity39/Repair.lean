@@ -15,6 +15,18 @@ its SHA-256 checksum bits are used as an additional, independent filter.
 
 namespace Parity39.Repair
 
+/-- One correction, in machine-readable form (the `notes` say the same in words). -/
+structure Edit where
+  /-- `wrong`, `blank`, `dropped`, `extra` or `swap` -/
+  kind : String
+  /-- 1-based position in the repaired phrase (`extra`: in the phrase as entered) -/
+  pos : Nat
+  /-- second position of a swap -/
+  pos2 : Nat := 0
+  /-- the correct word, where there is one -/
+  word : Option UInt16 := none
+  deriving Inhabited
+
 structure Candidate where
   phrase : Array UInt16
   /-- Number of edits: each substitution, swap, restored word or removed word counts 1. -/
@@ -24,6 +36,7 @@ structure Candidate where
   bip39 : Option Bool
   /-- Decoded values of the unprinted suffix symbols (see `repair`). -/
   virt : Array UInt16 := #[]
+  edits : Array Edit := #[]
   deriving Inhabited
 
 /-- All sorted `d`-element subsets of `{0, …, n-1}`. -/
@@ -47,6 +60,7 @@ private structure Hypothesis where
   /-- Erased positions that stand for a word the hypothesis says was dropped. -/
   restored : Array Nat := #[]
   isSwap : Bool := false
+  edits : Array Edit := #[]
 
 private def q (w : UInt16) : String := s!"'{Wordlist.word w}'"
 
@@ -63,7 +77,8 @@ private def hypotheses (n : Nat) (toks : Array (Option UInt16)) (maxEdits : Nat)
           if a != b then
             let recv := (toks.set! i (some b)).set! j (some a)
             hs := hs.push { recv, cost := 1, notes := #[s!"swapped words {i + 1} and {j + 1}"],
-                             isSwap := true }
+                             isSwap := true,
+                             edits := #[{ kind := "swap", pos := i + 1, pos2 := j + 1 }] }
         | _, _ => pure ()
   else if len < n && n - len ≤ maxEdits then
     -- `n - len` words were dropped: choose where the gaps are
@@ -82,6 +97,7 @@ private def hypotheses (n : Nat) (toks : Array (Option UInt16)) (maxEdits : Nat)
     for extra in combos len (len - n) do
       let mut recv : Array (Option UInt16) := #[]
       let mut notes : Array String := #[]
+      let edits : Array Edit := extra.map fun p => { kind := "extra", pos := p + 1 }
       for p in [0:len] do
         if extra.contains p then
           let what := match toks[p]! with
@@ -90,7 +106,7 @@ private def hypotheses (n : Nat) (toks : Array (Option UInt16)) (maxEdits : Nat)
           notes := notes.push s!"removed extra {what} at position {p + 1}"
         else
           recv := recv.push toks[p]!
-      hs := hs.push { recv, cost := len - n, notes }
+      hs := hs.push { recv, cost := len - n, notes, edits }
   return hs
 
 /--
@@ -116,12 +132,16 @@ def repair (k n : Nat) (toks : Array (Option UInt16)) (requireBip39 : Bool)
     | none => pure ()
     | some d =>
       let mut notes := h.notes
+      let mut edits := h.edits
       for p in d.erasures do
         if p < n then
+          edits := edits.push { kind := if h.restored.contains p then "dropped" else "blank",
+                                pos := p + 1, word := some d.codeword[p]! }
           let verb := if h.restored.contains p then "restored dropped word" else "filled in"
           notes := notes.push s!"{verb} {q d.codeword[p]!} at position {p + 1}"
       for p in d.errors do
         if p < n then
+          edits := edits.push { kind := "wrong", pos := p + 1, word := some d.codeword[p]! }
           notes := notes.push
             s!"replaced {q (h.recv[p]!.getD 0)} with {q d.codeword[p]!} at position {p + 1}"
         else
@@ -129,7 +149,7 @@ def repair (k n : Nat) (toks : Array (Option UInt16)) (requireBip39 : Bool)
       let cand : Candidate :=
         { phrase := d.codeword.extract 0 n, cost := h.cost + d.errors.size, notes,
           bip39 := Bip39.checksumOk (d.codeword.extract 0 (n - k)),
-          virt := d.codeword.extract n d.codeword.size }
+          virt := d.codeword.extract n d.codeword.size, edits }
       if requireBip39 && cand.bip39 != some true then
         pure ()
       else

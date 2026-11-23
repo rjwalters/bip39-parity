@@ -100,6 +100,22 @@ recoveries (2-of-3 / 3-of-5):
 With exactly `t` cards there is no cross-card redundancy, so only `k` helps:
 at 3% wrong words, k = 6 gives 96 / 95 and k = 8 gives 99 / 99.6 (300 trials).
 
+## Rehearsing a memorised phrase
+
+Experimental (`Parity39/Train.lean`). The parity words locate a mistake from the
+attempt alone, so a trainer can coach without knowing the phrase.
+
+    lake exe parity39 train new -k 4     # a practice phrase, laid out four words to a room
+    lake exe parity39 train -k 4         # type it from memory; `hint`, `show`, `quit`
+    lake exe parity39 train stats        # positions that fail on a first attempt
+
+Hints go from "2 things to fix", to which positions, to first letters, to the
+answer. Nothing typed is stored. The log (`~/.parity39/train.tsv`, or
+`$PARITY39_LOG`) records the time, the outcome and the positions and kinds of
+mistakes, never words. What you type stays visible in the terminal's
+scrollback, so practise with practice phrases, and check a real phrase only on
+an offline machine.
+
 ## Splitting one phrase is not secret sharing
 
 Splitting a high-parity phrase among several parties is a *ramp* scheme, not

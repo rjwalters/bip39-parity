@@ -1,4 +1,6 @@
 import Parity39
+import Parity39.Train
+import Parity39.Passphrase
 
 open Parity39
 
@@ -10,6 +12,11 @@ def usage : String :=
   parity39 repair -k K <words…>     find the closest valid phrase(s)
   parity39 split   -k K -t T -n N <seed words…>          deal N cards, any T recover
   parity39 combine -k K -t T <card> / <card> / …         recover from cards
+  parity39 train new -k K [--data N]    make a practice phrase to memorise
+  parity39 train -k K [--data N]        check a phrase typed from memory, with hints
+  parity39 train stats                  which positions you tend to get wrong
+  parity39 passphrase new \"FIRST MIDDLE LAST\"             a 12-word memorised passphrase
+  parity39 passphrase derive \"FIRST MIDDLE LAST\" <12 words>  check it and derive the 24-word BIP39 phrase
 
 Options:
   -k K        number of parity words (required)
@@ -183,8 +190,59 @@ def runCombine (a : Args) : IO UInt32 := do
     IO.println s!"  ({check}; {bip39Label (Bip39.checksumOk seed)})"
     return 0
 
+def runPassphrase (sub salt : String) (rest : List String) : IO UInt32 := do
+  if !Passphrase.validSalt salt then
+    IO.eprintln "the salt must be three words in capitals A-Z with single spaces, e.g. \"ADA KING LOVELACE\""
+    return 2
+  -- `--test-params KIB PASSES` gives a different (wrong) result quickly; for tests only
+  let (kib, t, rest) := match rest with
+    | "--test-params" :: a :: b :: more => (a.toNat?.getD 1024, b.toNat?.getD 1, more)
+    | _ => (Passphrase.memoryKiB, Passphrase.passes, rest)
+  match sub with
+  | "new" =>
+    let some p ← Passphrase.generate salt | do IO.eprintln "could not generate"; return 1
+    IO.println s!"Memorised passphrase for salt \"{salt}\" (modifiers in capitals):"
+    IO.println ""
+    for l in Passphrase.render p do IO.println l
+    IO.println ""
+    IO.println "The last two words are parity. Each modifier describes the next object in its room."
+    return 0
+  | "derive" =>
+    let toks := ((rest.flatMap (·.splitOn " ")).filter (· ≠ "")).toArray.map fun w =>
+      if w == "?" then none else Passphrase.lookup w
+    match Passphrase.read toks salt with
+    | .unreadable => IO.println "Too many mistakes to locate. Walk the rooms again."; return 1
+    | .ambiguous n => IO.println s!"{n} different phrases fit equally well; cannot tell which you meant."; return 3
+    | .wrongSalt =>
+      IO.println s!"These words are a valid passphrase, but not for the salt \"{salt}\". Check the salt."
+      return 1
+    | .ok phrase fixes =>
+      if fixes.isEmpty then IO.println "Passphrase checks out."
+      else
+        IO.println "Passphrase repaired:"
+        for f in fixes do IO.println s!"  - {f}"
+      (← IO.getStdout).flush
+      IO.eprintln s!"Deriving: Argon2id, {kib / 1024} MiB, {t} pass(es). This takes minutes…"
+      let seed := Passphrase.derive phrase salt kib t
+      match Bip39.fromEntropy seed with
+      | some ws => IO.println ""; IO.println (Wordlist.render ws); return 0
+      | none => IO.eprintln "internal error"; return 2
+  | _ => IO.eprint usage; return 2
+
 def main (args : List String) : IO UInt32 :=
   match args with
+  | "passphrase" :: sub :: salt :: rest => runPassphrase sub salt rest
+  | "train" :: "stats" :: _ => Train.stats
+  | "train" :: rest =>
+    let (isNew, rest) := match rest with
+      | "new" :: more => (true, more)
+      | _ => (false, rest)
+    match parseArgs rest {} with
+    | .ok a =>
+      match a.k with
+      | none => do IO.eprintln "train needs -k"; return 2
+      | some k => if isNew then Train.new k (a.data.getD 12) else Train.session k (a.data.getD 12) a.raw
+    | .error e => do IO.eprintln e; return 2
   | "split" :: rest =>
     match parseArgs rest {} with
     | .ok a => runSplit a
