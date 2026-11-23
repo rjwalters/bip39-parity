@@ -116,6 +116,24 @@ mistakes, never words. What you type stays visible in the terminal's
 scrollback, so practise with practice phrases, and check a real phrase only on
 an offline machine.
 
+## A memorised passphrase
+
+Experimental (`Parity39/Passphrase.lean`). Twelve words from a separate
+2048-word memory vocabulary (objects and modifiers, `data/memory/`), pictured
+as three rooms of four: ten secret words and two parity words. The salt is
+three words in capitals, by convention the user's name.
+
+    lake exe parity39 passphrase new "ADA KING LOVELACE"
+    lake exe parity39 passphrase derive "ADA KING LOVELACE" <12 words>
+
+`derive` checks the words, repairs what the parity allows, and stretches the ten
+secret words with Argon2id (2 GiB, 4 passes; this takes minutes) into a 24-word
+BIP39 phrase. The salt is covered by the parity words, so the right words under
+the wrong salt are reported instead of deriving a different, empty wallet.
+
+`lake exe kdftests` checks BLAKE2b and Argon2id against reference values;
+`lake exe kdftests KIB [PASSES]` times one Argon2id run.
+
 ## Splitting one phrase is not secret sharing
 
 Splitting a high-parity phrase among several parties is a *ramp* scheme, not
@@ -129,5 +147,15 @@ using it that way.
 - `Parity39/RS.lean` — syndromes, errors-and-erasures decoder, encoder
 - `Parity39/Bip39.lean`, `Sha256.lean`, `Wordlist.lean` — BIP39 layer
 - `Parity39/Repair.lean` — edit-hypothesis search
-- `Main.lean` — CLI; `Tests.lean` — tests and fault injection
+- `Parity39/Grid.lean` — grid shares (Shamir across cards, parity along each)
+- `Parity39/Train.lean` — rehearsal trainer
+- `Parity39/Passphrase.lean`, `Argon2.lean`, `Blake2b.lean` — memorised
+  passphrase and its key stretching
+- `Main.lean` — CLI; `Tests.lean`, `GridTests.lean`, `KdfTests.lean` — tests
+  and fault injection
 - `data/english.txt` — the BIP39 English wordlist (from bitcoin/bips)
+- `data/memory/` — the memory vocabulary (`objects.txt`, `modifiers.txt`,
+  compiled into the binary) and the Python scripts that drafted and curated it
+- `docs/` — threat model and UX flow; Lean performance notes
+- `papers/` — the whitepaper and its review history (Anvil threads; the latest
+  is `papers/parity39.4/main.pdf`)
